@@ -1,0 +1,77 @@
+<div class="container">
+  <h3>Add New Lending</h3>
+  <form [formGroup]="lendingForm">
+    <div class="row">
+      <div class="col-8">
+        <div class="row" style="margin-bottom: 5px">
+          <div class="col-2" style="text-align: center">Student ID</div>
+          <div class="col-4">
+            <input type="text" class="form-control" (keyup.enter)="searchStudent($event)">
+          </div>
+          <div class="col-2" style="text-align: center">Loan Date</div>
+          <div class="col-4" style="text-align: center">
+            <input type="date" class="form-control" formControlName="loanDate">
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-2" style="text-align: center">Scan Book ID</div>
+          <div class="col-4">
+            <input type="text" class="form-control" (keyup.enter)="searchBook($event)">
+          </div>
+        </div>
+      </div>
+      <div class="col-4" style="text-align: center">
+        <div>
+          <img src="" alt="" width="50px" height="75px">
+        </div>
+        <div *ngIf="student">
+          {{student.id}} - {{student.name}}
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <table *ngIf="bookList" class="table table-bordered">
+    <thead>
+    <th>Order</th>
+    <th>Book ID</th>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Number of Pages</th>
+    <th>Publisher</th>
+    <th style="text-align: center">Action</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of bookList;index as i">
+      <td>{{i + 1}}</td>
+      <td>{{book.id}}</td>
+      <td>{{book.isbn}}</td>
+      <td>{{book.title}}</td>
+      <td>{{book.number_of_pages}}</td>
+      <td>{{book.publisher}}</td>
+      <td style="text-align: center">
+        <button (click)=deteleBook(book) style="border-color: #dc3545; background-color: #dc3545; color: white"><i
+          class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2">
+      <button style="width: 100%" class="btn btn-primary" (click)="save()">Save</button>
+    </div>
+    <div class="col-2">
+      <button style="width: 100%" class="btn btn-light" (click)="returnLending()"> Cancel</button>
+    </div>
+  </div>
+
+</div>
+
+<!--{{lendingForm.value | json}}-->
+

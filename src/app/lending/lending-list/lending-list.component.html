@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>Lending List</h3>
+  <a [routerLink]="['add']">Add New Lending</a>
+  <table class="table table-bordered">
+    <thead>
+    <th style="text-align: center">Order</th>
+<!--    <th style="text-align: center">Lending ID</th>-->
+    <th>Student</th>
+    <th style="text-align: center">Loan Date</th>
+    <th style="text-align: center">Quantity</th>
+    <th style="text-align: center">Details</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let lending of lendingList;index as i">
+      <td style="text-align: center">{{i + 1}}</td>
+<!--      <td style="text-align: center">{{lending.id}}</td>-->
+      <td>{{lending.student.name}}</td>
+      <td style="text-align: center">{{lending.loanDate | date: 'dd/MM/yyyy '}}</td>
+      <td style="text-align: center">{{lending.bookList.length}}</td>
+      <td style="text-align: center">
+        <button [routerLink]="[lending.id]" class="btn btn-primary">
+          Detail
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

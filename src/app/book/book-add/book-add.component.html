@@ -1,0 +1,107 @@
+<div class="container">
+
+  <form [formGroup]="bookForm">
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+          <div class="col-2">
+            <label>ISBN</label>
+          </div>
+          <div class="col-4">
+            <input class="form-control" formControlName="isbn" (keyup.enter)="search()">
+          </div>
+          <div class="col-2">
+            <label>ID</label>
+          </div>
+          <div class="col-4">
+            <input class="form-control" formControlName="id">
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-2">
+            <label>Title</label>
+          </div>
+          <div class="col-10">
+            <input class="form-control" formControlName="title">
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-2">
+            <label>Authors</label>
+
+          </div>
+          <div class="col-10">
+            <div formArrayName="authors"
+                 *ngFor="let item of bookForm.get('authors').controls; let i = index;">
+              <div class="row" style="margin-top: 10px">
+                <div class="col-5">
+                  <div [formGroupName]="i">
+                    <input class="form-control" formControlName="name" placeholder="">
+                  </div>
+                </div>
+                <div class="col-1">
+                  <button (click)="removeAuthor(i)" class="btn btn-danger">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px">
+          <div class="col-2">
+          </div>
+          <div class="col-10">
+            <button class="btn btn-primary" (click)="addAuthor()">Add</button>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-2">
+            <label>Publisher</label>
+          </div>
+          <div class="col-4">
+            <input class="form-control" type="text" formControlName="publisher">
+          </div>
+          <div class="col-2">
+            <label>Publish Date</label>
+          </div>
+          <div class="col-4">
+            <input class="form-control" type="text" formControlName="publish_date">
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-2">
+            <label>Number of Pages</label>
+          </div>
+          <div class="col-4">
+            <input class="form-control" type="text" formControlName="number_of_pages">
+          </div>
+        </div>
+      </div>
+      <div class="col-4" style="text-align: center">
+        <input hidden type="text" formControlName="cover" #username>
+        <img src="{{username.value}}" alt="">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2">
+        <button style="width: 100%" class="btn btn-primary" (click)="save()">Save</button>
+      </div>
+      <div class="col-2">
+        <button style="width: 100%" class="btn btn-light" (click)="closeDialogAdd()"> Close</button>
+      </div>
+    </div>
+
+
+  </form>
+
+    {{bookForm.value | json}}
+</div>
+

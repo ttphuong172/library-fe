@@ -1,0 +1,54 @@
+<div class="container">
+  <h3>Return Book</h3>
+  <div>
+    <div class="row" style="margin-bottom: 20px">
+      <div class="col-2">
+        <h6>Scan Book ID</h6>
+      </div>
+      <div class="col-10">
+        <input type="text" class="form-control" (keydown.enter)="searchLendingBook($event)">
+      </div>
+    </div>
+    <div>
+      <table class="table table-bordered">
+        <thead>
+        <th>Order</th>
+        <th>LendingBook ID</th>
+        <th>Book ID</th>
+        <th>Book ISBN</th>
+        <th>Book Title</th>
+        <th>Student Name</th>
+        <th>Loan Data</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let lendingBookDTO of lendingBookDTOList; index as i">
+          <td>{{i + 1}}</td>
+          <td>{{lendingBookDTO.id}}</td>
+          <td>{{lendingBookDTO.book_id}}</td>
+          <td>{{lendingBookDTO.book_isbn}}</td>
+          <td>{{lendingBookDTO.book_title}}</td>
+          <td>{{lendingBookDTO.student_name}}</td>
+          <td>{{lendingBookDTO.loanDate }}</td>
+          <td style="text-align: center">
+            <button (click)=deteleBook(lendingBookDTO)
+                    style="border-color: #dc3545; background-color: #dc3545; color: white"><i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2"></div>
+      <div class="col-2">
+        <button style="width: 100%" class="btn btn-primary" (click)="comfirmReturn()">Comfirm</button>
+      </div>
+      <div class="col-2">
+        <button style="width: 100%" class="btn btn-light" (click)="returnList()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

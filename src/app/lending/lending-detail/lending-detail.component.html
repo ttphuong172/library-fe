@@ -1,0 +1,73 @@
+<div class="container">
+  <h3>Detail of Lending</h3>
+  <div *ngIf="lending">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <label>Student ID</label>
+      </div>
+      <div class="col-5">{{lending.student.id}}</div>
+      <div class="col-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <label>Student Name</label>
+      </div>
+      <div class="col-5">{{lending.student.name}}</div>
+      <div class="col-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <label>Loan Date</label>
+      </div>
+      <div class="col-5">{{lending.loanDate}}</div>
+      <div class="col-4"></div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+      <th>ID</th>
+      <th>ISBN</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Number Of Pages</th>
+      <th>Publish Date</th>
+      <th>Publisher</th>
+      <th>Rack</th>
+      <th>Return Date</th>
+
+      </thead>
+      <tbody>
+      <tr *ngFor="let book of lending.bookDTOList">
+        <td>{{book.id}}</td>
+        <td>{{book.isbn}}</td>
+        <td>{{book.title}}</td>
+        <!--      <td>-->
+        <!--        <img src="{{book.cover}}" alt="" width="30px">-->
+        <!--      </td>-->
+        <td>
+        <span *ngFor="let author of book.authors">
+          <span>{{author.name}}</span>
+        </span>
+        </td>
+        <td>{{book.number_of_pages}}</td>
+        <td>{{book.publish_date}}</td>
+        <td>{{book.publisher}}</td>
+        <!--      <td><button class="btn btn-primary">Detail</button></td>-->
+        <td>
+          {{book.rack.name}} - {{book.rack.library.name}}
+        </td>
+        <!--      <td>-->
+        <!--        {{book.status}}-->
+        <!--      </td>-->
+        <!--      <td><button class="btn btn-primary" [routerLink]="['/books', book.id]">Detail</button></td>-->
+        <!--        <td>-->
+        <!--          <button class="btn btn-danger" (click)="openDialogDelete(book)"><i class="fa fa-trash"></i></button>-->
+        <!--        </td>-->
+        <td>{{book.returnDate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

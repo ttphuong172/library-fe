@@ -1,0 +1,22 @@
+<div class="container">
+  <h3>List of Student</h3>
+  <table class="table table-bordered">
+    <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th style="text-align: center">Quantity</th>
+    <th style="text-align: center">Detail</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of studentList">
+      <td>{{student.id}}</td>
+      <td>{{student.name}}</td>
+      <td style="text-align: center">{{student.bookDTOList.length}}</td>
+      <td style="text-align: center">
+        <button class="btn btn-primary" [routerLink]="['/students', student.id]">Detail</button>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+</div>

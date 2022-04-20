@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>Return List</h3>
+  <a [routerLink]="['add']">Add New Return</a>
+  <table class="table table-bordered">
+    <thead>
+    <th style="text-align: center">Order</th>
+<!--    <th>LendingBook ID</th>-->
+    <th style="text-align: center">Book ID</th>
+    <th>Book ISBN</th>
+    <th>Book Title</th>
+    <th>Student Name</th>
+    <th>Loan Date</th>
+    <th>Return Date</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let lendingBookDTO of lendingBookDTOList; index as i">
+      <td style="text-align: center">{{i + 1}}</td>
+<!--      <td>{{lendingBookDTO.id}}</td>-->
+      <td style="text-align: center">{{lendingBookDTO.book_id}}</td>
+      <td>{{lendingBookDTO.book_isbn}}</td>
+      <td>{{lendingBookDTO.book_title}}</td>
+      <td>{{lendingBookDTO.student_name}}</td>
+      <td>{{lendingBookDTO.loanDate }}</td>
+      <td>{{lendingBookDTO.returnDate }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

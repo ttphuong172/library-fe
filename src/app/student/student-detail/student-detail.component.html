@@ -1,0 +1,75 @@
+<div class="container">
+  <div *ngIf="student">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <label>Student ID</label>
+      </div>
+      <div class="col-5">{{student.id}}</div>
+      <div class="col-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <label>Student Name</label>
+      </div>
+      <div class="col-5">{{student.name}}</div>
+      <div class="col-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <label>Quantity</label>
+      </div>
+      <div class="col-5">{{student.bookDTOList.length}}</div>
+      <div class="col-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <label>Returned</label>
+      </div>
+      <div class="col-5">{{returnedQuantity}}</div>
+      <div class="col-4"></div>
+    </div>
+    <div>
+      <table class="table table-bordered">
+        <thead>
+        <th>Order</th>
+        <th>Book ID</th>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Number Of Pages</th>
+        <th>Publish Date</th>
+        <th>Publisher</th>
+        <th>Rack</th>
+        <th>Loan Date</th>
+        <th>Return Date</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let book of student.bookDTOList;index as i">
+          <td>{{i +1}}</td>
+          <td>{{book.id}}</td>
+          <td>{{book.isbn}}</td>
+          <td>{{book.title}}</td>
+          <td>
+        <span *ngFor="let author of book.authors">
+          <span>{{author.name}}</span>
+        </span>
+          </td>
+          <td>{{book.number_of_pages}}</td>
+          <td>{{book.publish_date}}</td>
+          <td>{{book.publisher}}</td>
+          <td>{{book.rack.name}} - {{book.rack.library.name}}</td>
+          <td>{{book.loanDate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{book.returnDate | date: 'dd/MM/yyyy'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+</div>
+
