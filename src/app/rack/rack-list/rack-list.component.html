@@ -1,21 +1,35 @@
 <div class="container">
-  <h3>Bookcase of List</h3>
+  <h3>List of Racks</h3>
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-2">
+      <button  style="width: 100%" class="btn btn-light" (click)="openDialogAdd()">
+        <i class="fa fa-plus"></i> New rack
+      </button>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+  </div>
   <table class="table table-bordered table-striped">
     <thead>
     <th>Order</th>
     <th>Name</th>
-    <th>Description</th>
+    <th>Library</th>
     <th style="text-align: center">Quantity</th>
     <th style="text-align: center">Detail</th>
     </thead>
     <tbody>
-    <tr *ngFor="let bookcase of bookcaseList; index as i">
+    <tr *ngFor="let rack of rackList; index as i">
       <td>{{i+1}}</td>
-      <td>{{bookcase.name}}</td>
-      <td>{{bookcase.description}}</td>
-      <td style="text-align: center">{{bookcase.bookList.length}}</td>
+      <td>{{rack.name}}</td>
+      <td>{{rack.library.name}}</td>
+      <td style="text-align: center">{{rack.bookList.length}}</td>
       <td style="text-align: center">
-        <button class="btn btn-primary"  [routerLink]="['/racks', bookcase.id]">Detail</button>
+        <button style="background-color: #007bff;border-color: #007bff;color: white" [routerLink]="['/racks', rack.id]">
+          <i class="fa fa-info-circle"></i>
+        </button>
       </td>
     </tr>
     </tbody>

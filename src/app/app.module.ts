@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {BookAddComponent} from './book/book-add/book-add.component';
+import {BookAddRackComponent} from './rack/book-add-rack/book-add-rack.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -27,12 +27,15 @@ import {ReturnListComponent} from './return/return-list/return-list.component';
 import {ReturnComponent} from './return/return/return.component';
 import {LendingComponent} from './lending/lending/lending.component';
 import {AdminComponent} from './common/admin/admin.component';
+import { BookAddComponent } from './book/book-add/book-add.component';
+import { RackAddComponent } from './rack/rack-add/rack-add.component';
+import { RackEditComponent } from './rack/rack-edit/rack-edit.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookAddComponent,
+    BookAddRackComponent,
     BookListComponent,
     BookDeleteComponent,
     RackListComponent,
@@ -47,7 +50,10 @@ import {AdminComponent} from './common/admin/admin.component';
     ReturnListComponent,
     ReturnComponent,
     LendingComponent,
-    AdminComponent
+    AdminComponent,
+    BookAddComponent,
+    RackAddComponent,
+    RackEditComponent
   ],
   imports: [
     BrowserModule,

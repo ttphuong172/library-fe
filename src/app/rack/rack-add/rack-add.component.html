@@ -1,0 +1,35 @@
+<h3>Add New Rack</h3>
+<form [formGroup]="rackForm">
+<div class="row" style="margin: 20px 0px">
+  <div class="col-1">
+    Name
+  </div>
+  <div class="col-5">
+    <input type="text" class="form-control" formControlName="name">
+  </div>
+
+  <div class="col-1">
+    Library
+  </div>
+  <div class="col-5">
+    <select name="" id="" class="form-control" formControlName="library">
+      <option value="">Choose a library</option>
+      <option *ngFor="let library of libraryList" [ngValue]="library">{{library.name}}</option>
+    </select>
+  </div>
+</div>
+</form>
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-2"></div>
+  <div class="col-2"></div>
+  <div class="col-2"></div>
+  <div class="col-2">
+    <button style="width: 100%" class="btn btn-primary" (click)="save()" [disabled]="!rackForm.valid">Save</button>
+  </div>
+  <div class="col-2">
+    <button style="width: 100%" class="btn btn-light" (click)="closeDialogAdd()"> Close</button>
+  </div>
+</div>
+
+{{rackForm.value | json}}

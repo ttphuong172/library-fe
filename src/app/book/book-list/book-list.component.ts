@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {BookService} from "../../../service/book.service";
-import {BookAddComponent} from "../book-add/book-add.component";
+import {BookAddRackComponent} from "../../rack/book-add-rack/book-add-rack.component";
 import {MatDialog} from "@angular/material/dialog";
 import {BookDeleteComponent} from "../book-delete/book-delete.component";
+import {BookAddComponent} from "../book-add/book-add.component";
 
 @Component({
   selector: 'app-book-list',
@@ -79,5 +80,21 @@ export class BookListComponent implements OnInit {
   changeStatus($event: any) {
     this.status=$event.target.value;
     this.search();
+  }
+
+  openDialogAdd() {
+    const dialogRefAdd = this.matDialog.open(BookAddComponent, {
+      width: '1000px',
+      disableClose: true
+    })
+    dialogRefAdd.afterClosed().subscribe(
+      () => {
+      },
+      () => {
+      },
+      () => {
+        this.ngOnInit();
+      }
+    )
   }
 }

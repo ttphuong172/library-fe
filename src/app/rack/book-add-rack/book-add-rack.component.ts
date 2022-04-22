@@ -1,34 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {BookService} from "../../../service/book.service";
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {MatDialogRef} from "@angular/material/dialog";
-import {LibraryService} from "../../../service/library.service";
-import {RackService} from "../../../service/rack.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-book-add',
-  templateUrl: './book-add.component.html',
-  styleUrls: ['./book-add.component.css']
+  templateUrl: './book-add-rack.component.html',
+  styleUrls: ['./book-add-rack.component.css']
 })
-export class BookAddComponent implements OnInit {
+export class BookAddRackComponent implements OnInit {
   bookTempAPI: any;
   bookForm: FormGroup | any;
   cover = '';
   number_of_pages = 0;
   subtitle = '';
-  authorsAPI: any;
-  libraryList:any;
-  nameLibrarySelected:any;
-  rackList: any;
 
   constructor(
     private bookService: BookService,
-    private libraryService: LibraryService,
-    private rackService:RackService,
     private formBuilder: FormBuilder,
-    public dialogRefAdd: MatDialogRef<BookAddComponent>,
+    public dialogRefAdd: MatDialogRef<BookAddRackComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:any
   ) {
   }
+
+  authorsAPI: any;
 
   ngOnInit(): void {
     this.bookForm = new FormGroup({
@@ -40,17 +35,11 @@ export class BookAddComponent implements OnInit {
       publisher: new FormControl(''),
       number_of_pages: new FormControl(''),
       publish_date: new FormControl(''),
-      library: new FormControl(''),
-      rack: new FormControl(''),
+      library: new FormControl(this.data.library),
+      rack: new FormControl(this.data),
     });
-
-    this.libraryService.findAll().subscribe(
-      (data)=>{
-        this.libraryList=data;
-        console.log(this.libraryList)
-      }
-    )
   }
+
 
   setAuthor(name: any): FormGroup {
     return this.formBuilder.group({
@@ -71,6 +60,7 @@ export class BookAddComponent implements OnInit {
   removeAuthor(index: number) {
     this.authors.removeAt(index);
   }
+
 
   search() {
 
@@ -126,10 +116,6 @@ export class BookAddComponent implements OnInit {
           this.bookForm.controls['publish_date'].setValue(this.bookTempAPI["ISBN:" + isbnForm].publish_date);
 
         }
-      },
-      ()=>{},
-      ()=>{
-
       }
     )
   }
@@ -149,15 +135,5 @@ export class BookAddComponent implements OnInit {
   closeDialogAdd() {
     this.dialogRefAdd.close()
   }
-
-  changeLibrary($event: any) {
-    this.nameLibrarySelected = $event.target.selectedOptions[0].innerHTML;
-    console.log(this.nameLibrarySelected)
-    this.rackService.findAllByLibrary_Name(this.nameLibrarySelected).subscribe(
-      (data)=>{
-        this.rackList=data;
-        console.log(this.rackList)
-      }
-    )
-  }
 }
+

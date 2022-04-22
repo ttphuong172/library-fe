@@ -1,1 +1,40 @@
+<div class="container">
+  <nav class="navbar navbar-expand-md bg-light navbar-dark">
+    <a class="navbar-brand" href="#">
+      <img src="assets/img/logo.png" alt="" style="height: 80px">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="background-color: #d5a520">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="racks" style="color: #0e1c42;font-size: 18px">Rack</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="books" style="color: #0e1c42;font-size: 18px">Book</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="lendings" style="color: #0e1c42;font-size: 18px">Lending</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="returns" style="color: #0e1c42;font-size: 18px">Return</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="students" style="color: #0e1c42;font-size: 18px">Student</a>
+        </li>
+      </ul>
+    </div>
+    <!--  <div class="dropdown">-->
+    <!--    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+    <!--      {{username}}-->
+    <!--    </button>-->
+    <!--    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">-->
+    <!--      <button class="dropdown-item" type="button" (click)="openDialogChangePassword()">Change Password</button>-->
+    <!--      <button class="dropdown-item" type="button" (click)="logout()">Logout</button>-->
+    <!--    </div>-->
+    <!--  </div>-->
+  </nav>
+</div>
+
 <router-outlet></router-outlet>

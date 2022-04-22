@@ -1,6 +1,19 @@
 <div class="container">
-  <h3>Lending List</h3>
-  <a [routerLink]="['add']">Add New Lending</a>
+  <h3>List of Lendings</h3>
+<!--  <a >Add New Lending</a>-->
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-2">
+      <button  style="width: 100%" class="btn btn-light" [routerLink]="['add']">
+        <i class="fa fa-plus"></i> New lending
+      </button>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+  </div>
+
   <table class="table table-bordered">
     <thead>
     <th style="text-align: center">Order</th>

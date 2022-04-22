@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {BookService} from "../../../service/book.service";
 import {LendingbookService} from "../../../service/lendingbook.service";
 import {BookDeleteComponent} from "../book-delete/book-delete.component";
 import {MatDialog} from "@angular/material/dialog";
+
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-book-detail',
@@ -54,5 +58,9 @@ export class BookDetailComponent implements OnInit {
         this.ngOnInit();
       }
     )
+  }
+
+  openDialogEdit() {
+
   }
 }

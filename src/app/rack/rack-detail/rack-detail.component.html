@@ -1,51 +1,88 @@
 <div class="container">
-  <h3>Detail of Bookcase</h3>
-  <a (click)="openDialogAdd()">Add New Book</a>
-    <table class="table table-bordered">
-      <thead>
-      <th>ID</th>
-      <th>ISBN</th>
-      <th>Title</th>
-      <!--    <th>Cover</th>-->
-      <th>Author</th>
-      <th>Number Of Pages</th>
-      <th>Publish Date</th>
-      <th>Publisher</th>
-      <th>Rack</th>
-      <th>Status</th>
-      <th>Detail</th>
-      <!--    <th>Detail</th>-->
-<!--      <th>Delete</th>-->
-      </thead>
-      <tbody>
-      <tr *ngFor="let book of bookList">
-        <td>{{book.id}}</td>
-        <td>{{book.isbn}}</td>
-        <td>{{book.title}}</td>
-        <!--      <td>-->
-        <!--        <img src="{{book.cover}}" alt="" width="30px">-->
-        <!--      </td>-->
-        <td>
+  <div class="row">
+    <div class="col-6">
+      <h3 *ngIf="rack">Detail of Rack: {{rack.name}} - {{rack.library.name}}</h3>
+      <ul>
+        <li *ngIf="bookList">Quantity:{{bookList.length}}</li>
+        <li>Quantity Loan: {{quantityLoan}}</li>
+        <li>Quantity Available: {{quantityAvailable}}</li>
+      </ul>
+    </div>
+    <div class="col-6">
+      <div class="row" style="display: flex; justify-content: flex-end">
+        <div style="margin-right: 5px">
+          <button (click)="openDialogEdit()">
+            <i class="fa fa-edit"></i>
+          </button>
+        </div>
+        <div>
+          <button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-2">
+      <button style="width: 100%" class="btn btn-light" (click)="openDialogAdd()">
+        <i class="fa fa-plus"></i> New book
+      </button>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+
+  </div>
+  <table class="table table-bordered">
+    <thead>
+    <th>ID</th>
+    <th>ISBN</th>
+    <th>Title</th>
+    <!--    <th>Cover</th>-->
+    <th>Author</th>
+    <th>Number Of Pages</th>
+    <th>Publish Date</th>
+    <th>Publisher</th>
+    <th>Rack</th>
+    <th>Status</th>
+    <th>Detail</th>
+    <!--    <th>Detail</th>-->
+    <!--      <th>Delete</th>-->
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of bookList">
+      <td>{{book.id}}</td>
+      <td>{{book.isbn}}</td>
+      <td>{{book.title}}</td>
+      <!--      <td>-->
+      <!--        <img src="{{book.cover}}" alt="" width="30px">-->
+      <!--      </td>-->
+      <td>
         <span *ngFor="let author of book.authors">
           <span>{{author.name}}</span>
         </span>
-        </td>
-        <td>{{book.number_of_pages}}</td>
-        <td>{{book.publish_date}}</td>
-        <td>{{book.publisher}}</td>
-        <!--      <td><button class="btn btn-primary">Detail</button></td>-->
-        <td>
-          {{book.rack.name}} - {{book.rack.library.name}}
-        </td>
-        <td>
-          {{book.status}}
-        </td>
-        <td><button class="btn btn-primary" [routerLink]="['/books', book.id]">Detail</button></td>
-<!--        <td>-->
-<!--          <button class="btn btn-danger" (click)="openDialogDelete(book)"><i class="fa fa-trash"></i></button>-->
-<!--        </td>-->
-      </tr>
-      </tbody>
-    </table>
+      </td>
+      <td>{{book.number_of_pages}}</td>
+      <td>{{book.publish_date}}</td>
+      <td>{{book.publisher}}</td>
+      <!--      <td><button class="btn btn-primary">Detail</button></td>-->
+      <td>
+        {{book.rack.name}} - {{book.rack.library.name}}
+      </td>
+      <td>
+        {{book.status}}
+      </td>
+      <td>
+        <button style="background-color: #007bff;border-color: #007bff;color: white" [routerLink]="['/books', book.id]">
+          <i class="fa fa-info-circle"></i>
+        </button>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
 
 </div>

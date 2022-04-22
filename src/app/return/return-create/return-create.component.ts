@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 export class ReturnCreateComponent implements OnInit {
   lendingBookDTO: any;
   lendingBookDTOList: LendingBookDTO[] = [];
+  idBook: any;
 
   constructor(
     private lendingbookService: LendingbookService,
@@ -52,8 +53,7 @@ export class ReturnCreateComponent implements OnInit {
         }
       )
     }
-
-
+    this.idBook='';
   }
 
   comfirmReturn() {

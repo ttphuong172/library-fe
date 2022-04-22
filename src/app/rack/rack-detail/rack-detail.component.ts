@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {BookService} from "../../../service/book.service";
 import {ActivatedRoute} from "@angular/router";
-import {BookAddComponent} from "../../book/book-add/book-add.component";
+import {BookAddRackComponent} from "../book-add-rack/book-add-rack.component";
 import {MatDialog} from "@angular/material/dialog";
 import {RackService} from "../../../service/rack.service";
+import {RackEditComponent} from "../rack-edit/rack-edit.component";
 
 @Component({
   selector: 'app-bookcase-detail',
@@ -13,6 +14,8 @@ import {RackService} from "../../../service/rack.service";
 export class RackDetailComponent implements OnInit {
   rack: any;
   bookList: any;
+  quantityLoan = 0;
+  quantityAvailable = 0;
 
   constructor(
     private bookService: BookService,
@@ -37,6 +40,13 @@ export class RackDetailComponent implements OnInit {
           (data) => {
             this.bookList = data;
             console.log(this.bookList)
+            for (let i = 0; i < this.bookList.length; i++) {
+              if (this.bookList[i].status == 'LOANED') {
+                this.quantityLoan++;
+              } else {
+                this.quantityAvailable++;
+              }
+            }
           }
         )
       }
@@ -44,12 +54,29 @@ export class RackDetailComponent implements OnInit {
   }
 
   openDialogAdd() {
-    const dialogRefAdd = this.matDialog.open(BookAddComponent, {
+    const dialogRefAdd = this.matDialog.open(BookAddRackComponent, {
       width: '1000px',
       data:this.rack,
       disableClose: true
     })
     dialogRefAdd.afterClosed().subscribe(
+      () => {
+      },
+      () => {
+      },
+      () => {
+        this.ngOnInit();
+      }
+    )
+  }
+
+  openDialogEdit() {
+    const dialogRefEdit = this.matDialog.open(RackEditComponent, {
+      width: '600px',
+      data:this.rack,
+      disableClose: true
+    })
+    dialogRefEdit.afterClosed().subscribe(
       () => {
       },
       () => {

@@ -71,7 +71,6 @@
             <input class="form-control" type="text" formControlName="publish_date">
           </div>
         </div>
-
         <div class="row" style="margin-top: 10px">
           <div class="col-2">
             <label>Number of Pages</label>
@@ -80,27 +79,6 @@
             <input class="form-control" type="text" formControlName="number_of_pages">
           </div>
         </div>
-        <div class="row" style="margin-top: 10px">
-          <div class="col-2">
-            <label>Library</label>
-          </div>
-          <div class="col-4">
-            <select name="" class="form-control" formControlName="library" (change)="changeLibrary($event)">
-              <option value="">Choose a library</option>
-              <option *ngFor="let library of libraryList" [ngValue]="library">{{library.name}}</option>
-            </select>
-          </div>
-          <div class="col-2">
-            <label>Rack</label>
-          </div>
-          <div class="col-4">
-            <select name="" class="form-control" formControlName="rack">
-              <option value="">Choose a rack</option>
-              <option *ngFor="let rack of rackList" [ngValue]="rack">{{rack.name}}</option>
-            </select>
-          </div>
-        </div>
-
       </div>
       <div class="col-4" style="text-align: center">
         <input hidden type="text" formControlName="cover" #username>
@@ -124,6 +102,6 @@
 
   </form>
 
-  {{bookForm.value | json}}
+    {{bookForm.value | json}}
 </div>
 

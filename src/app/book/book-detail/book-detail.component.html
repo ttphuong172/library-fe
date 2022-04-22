@@ -1,78 +1,108 @@
 <div class="container">
+
   <h3>Detail of Book</h3>
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-2">
+
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2 row" style="display: flex; justify-content: flex-end">
+      <div style="margin-right: 5px">
+        <button (click)="openDialogEdit()">
+          <i class="fa fa-edit"></i>
+        </button>
+      </div>
+      <div>
+        <button style="background-color: #c82333; border-color: #c82333;color: white" (click)="openDialogDelete(book)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div *ngIf="book" class="row">
     <div class="col-1"></div>
-    <div class="col-6">
-      <h6>
-        <div class="row">
-          <div class="col-4"><label>ID</label></div>
-          <div class="col-8"><label>{{book.id}}</label></div>
-        </div>
-        <div class="row">
-          <div class="col-4"><label>ISBN</label></div>
-          <div class="col-8"><label>{{book.isbn}}</label></div>
-        </div>
-        <div class="row">
-          <div class="col-4"><label>Title</label></div>
-          <div class="col-8"><label>{{book.title}}</label></div>
-        </div>
-        <div class="row">
-          <div class="col-4"><label>Author</label></div>
-          <div class="col-8"><label>
-            <table>
-              <tr *ngFor="let author of book.authors">
-                <td>{{author.name}}</td>
-              </tr>
-            </table>
-          </label></div>
-        </div>
-        <div class="row">
-          <div class="col-4"><label>Number of Pages</label></div>
-          <div class="col-8"><label>{{book.number_of_pages}}</label></div>
-        </div>
-        <div class="row">
-          <div class="col-4"><label>Publish Date</label></div>
-          <div class="col-8"><label>{{book.publish_date}}</label></div>
-        </div>
-        <div class="row">
-          <div class="col-4"><label>Publisher</label></div>
-          <div class="col-8"><label>{{book.publisher}}</label></div>
-        </div>
-        <div class="row">
-          <div class="col-4"><label>Bookcase</label></div>
-          <div class="col-8">
-            <label>
-              <a [routerLink]="['/racks', book.rack.id]">
-                {{book.rack.name}} - {{book.rack.library.name}}
-              </a>
-            </label>
+      <div class="col-6">
+        <div id="pdfTable" #pdfTable>
+        <h6>
+          <div class="row">
+            <div class="col-4"><label>ID</label></div>
+            <div class="col-8"><label>{{book.id}}</label></div>
           </div>
-        </div>
-        <div *ngIf="lendingBookDTO" class="row">
-          <div class="col-4"><label>Student</label></div>
-          <div class="col-8">
-            {{lendingBookDTO.student_name}}
+
+          <div class="row">
+            <div class="col-4"><label>ISBN</label></div>
+            <div class="col-8"><label>{{book.isbn}}</label></div>
           </div>
-        </div>
-      </h6>
+          <div class="row">
+            <div class="col-4"><label>Title</label></div>
+            <div class="col-8"><label>{{book.title}}</label></div>
+          </div>
+          <div class="row">
+            <div class="col-4"><label>Author</label></div>
+            <div class="col-8"><label>
+              <table>
+                <tr *ngFor="let author of book.authors">
+                  <td>{{author.name}}</td>
+                </tr>
+              </table>
+            </label></div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-4"><label>Number of Pages</label></div>
+            <div class="col-8"><label>{{book.number_of_pages}}</label></div>
+          </div>
+          <div class="row">
+            <div class="col-4"><label>Publish Date</label></div>
+            <div class="col-8"><label>{{book.publish_date}}</label></div>
+          </div>
+          <div class="row">
+            <div class="col-4"><label>Publisher</label></div>
+            <div class="col-8"><label>{{book.publisher}}</label></div>
+          </div>
+          <div class="row">
+            <div class="col-4"><label>Bookcase</label></div>
+            <div class="col-8">
+              <label>
+                <a [routerLink]="['/racks', book.rack.id]">
+                  {{book.rack.name}} - {{book.rack.library.name}}
+                </a>
+              </label>
+            </div>
+          </div>
+          <div *ngIf="lendingBookDTO" class="row">
+            <div class="col-4"><label>Student</label></div>
+            <div class="col-8">
+              {{lendingBookDTO.student_name}}
+            </div>
+          </div>
+        </h6>
+      </div>
     </div>
     <div class="col-4">
       <img src="{{book.cover}}" alt="">
     </div>
     <div class="col-1"></div>
   </div>
-  <div class="row">
+  <div class="row" style="margin-top: 20px">
     <div class="col-1"></div>
     <div class="col-2"></div>
     <div class="col-2"></div>
     <div class="col-2"></div>
-    <div style="width: 100%" class="col-2">
-      <button class="btn btn-light">Cancel</button>
+    <div class="col-2">
+      <button style="width: 100%" class="btn btn-light" [routerLink]="['/books']">Cancel</button>
     </div>
-    <div style="width: 100%" class="col-2">
-      <button class="btn btn-danger" (click)="openDialogDelete(book)">Delete</button>
+    <div class="col-2">
+
     </div>
     <div class="col-1"></div>
   </div>
+
+
 </div>
 
