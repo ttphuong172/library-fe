@@ -27,9 +27,18 @@ import {ReturnListComponent} from './return/return-list/return-list.component';
 import {ReturnComponent} from './return/return/return.component';
 import {LendingComponent} from './lending/lending/lending.component';
 import {AdminComponent} from './common/admin/admin.component';
-import { BookAddComponent } from './book/book-add/book-add.component';
-import { RackAddComponent } from './rack/rack-add/rack-add.component';
-import { RackEditComponent } from './rack/rack-edit/rack-edit.component';
+import {BookAddComponent} from './book/book-add/book-add.component';
+import {RackAddComponent} from './rack/rack-add/rack-add.component';
+import {RackEditComponent} from './rack/rack-edit/rack-edit.component';
+import {BookEditComponent} from './book/book-edit/book-edit.component';
+import {LoginComponent} from './common/login/login.component';
+import {AdminGuard} from "../service/admin.guard";
+import { UserComponent } from './common/user/user.component';
+import { BookListUserComponent } from './book/book-list-user/book-list-user.component';
+import {UserGuard} from "../service/user.guard";
+import { AccountDetailUserComponent } from './student/account-detail-user/account-detail-user.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import { PasswordComponent } from './common/password/password.component';
 
 
 @NgModule({
@@ -53,7 +62,13 @@ import { RackEditComponent } from './rack/rack-edit/rack-edit.component';
     AdminComponent,
     BookAddComponent,
     RackAddComponent,
-    RackEditComponent
+    RackEditComponent,
+    BookEditComponent,
+    LoginComponent,
+    UserComponent,
+    BookListUserComponent,
+    AccountDetailUserComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -66,8 +81,9 @@ import { RackEditComponent } from './rack/rack-edit/rack-edit.component';
     MatIconModule,
     MatSnackBarModule,
     RouterModule.forRoot([
+      {path: "", component: LoginComponent},
       {
-        path: "", component: AdminComponent, children: [
+        path: "admin", component: AdminComponent, canActivate: [AdminGuard], children: [
           {path: "books", component: BookListComponent},
           {path: "books/:id", component: BookDetailComponent},
           {path: "racks", component: RackListComponent},
@@ -89,8 +105,15 @@ import { RackEditComponent } from './rack/rack-edit/rack-edit.component';
           }
         ]
       },
+      {
+        path: "", component: UserComponent, canActivate: [UserGuard], children: [
+          {path: "books", component: BookListUserComponent},
+          {path: "borrowed", component: AccountDetailUserComponent}
+        ]
+      }
     ]),
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,18 +2,24 @@
   <h3>List of Student</h3>
   <table class="table table-bordered">
     <thead>
-    <th>ID</th>
+    <th style="text-align: center">Student ID</th>
     <th>Name</th>
+    <th>Position</th>
     <th style="text-align: center">Quantity</th>
+    <th style="text-align: center">Returned Quantity</th>
+    <th style="text-align: center">Keeping Quantity</th>
     <th style="text-align: center">Detail</th>
     </thead>
     <tbody>
-    <tr *ngFor="let student of studentList">
-      <td>{{student.id}}</td>
-      <td>{{student.name}}</td>
-      <td style="text-align: center">{{student.bookDTOList.length}}</td>
+    <tr *ngFor="let account of borrowerList">
+      <td style="text-align: center">{{account.id}}</td>
+      <td>{{account.fullname}}</td>
+      <td>{{account.position}}</td>
+      <td style="text-align: center">{{account.bookQuantity}}</td>
+      <td style="text-align: center">{{account.returnedQuantity}}</td>
+      <td style="text-align: center">{{account.keepingQuantity}}</td>
       <td style="text-align: center">
-        <button class="btn btn-primary" [routerLink]="['/students', student.id]">Detail</button>
+        <button class="btn btn-primary" [routerLink]="['/admin/students', account.id]">Detail</button>
       </td>
     </tr>
     </tbody>

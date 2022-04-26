@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+.background{
+  height: 100vh; display: flex;flex-direction: column;justify-content: center
+}
+button{
+  margin: 10px 0;
+}

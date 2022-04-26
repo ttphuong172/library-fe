@@ -63,13 +63,13 @@ export class ReturnCreateComponent implements OnInit {
       () => {
       },
       () => {
-        this.router.navigateByUrl("/returns")
+        this.router.navigateByUrl("/admin/returns")
       }
     )
   }
 
   returnList() {
-    this.router.navigateByUrl("/returns")
+    this.router.navigateByUrl("/admin/returns")
   }
 
   deteleBook(lendingBookDTO: LendingBookDTO) {

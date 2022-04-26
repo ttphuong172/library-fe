@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import {BookEditComponent} from "../book-edit/book-edit.component";
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -16,7 +17,7 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 })
 export class BookDetailComponent implements OnInit {
   book:any;
-  lendingBookDTO:any
+  lendingBookDTO: any;
   constructor(
     private activatedRoute:ActivatedRoute,
     private bookService:BookService,
@@ -27,18 +28,18 @@ export class BookDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = String(this.activatedRoute.snapshot.paramMap.get('id'));
 
-    this.lendingbookService.findAllByBook_IdAndReturnDateIsNull(id).subscribe(
-      (data)=>{
-        console.log(data);
-        this.lendingBookDTO=data;
-      },
-      ()=>{}
-    );
+
 
     this.bookService.findById(id).subscribe(
       (data)=>{
         this.book=data;
-        console.log(this.book)
+      },()=>{},()=>{
+        this.lendingbookService.findAllByBook_IdAndReturnDateIsNull(id).subscribe(
+          (data)=>{
+            // console.log(data);
+            this.lendingBookDTO=data;
+          }
+        );
       }
     )
   }
@@ -60,7 +61,20 @@ export class BookDetailComponent implements OnInit {
     )
   }
 
-  openDialogEdit() {
-
+  openDialogEdit(book:any) {
+    const dialogRefEdit = this.matDialog.open(BookEditComponent, {
+      width: '1000px',
+      data: book,
+      disableClose: true
+    })
+    dialogRefEdit.afterClosed().subscribe(
+      () => {
+      },
+      () => {
+      },
+      () => {
+        this.ngOnInit();
+      }
+    )
   }
 }

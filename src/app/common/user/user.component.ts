@@ -6,15 +6,14 @@ import {PasswordComponent} from "../password/password.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class AdminComponent implements OnInit {
+export class UserComponent implements OnInit {
   username: any;
   fullname:any;
   account:any;
-
   constructor(
     private router:Router,
     private authService:AuthService,
@@ -24,15 +23,16 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.findByUsername(this.authService.getUsername()).subscribe(
-      (data) => {
+      (data)=>{
         console.log(data);
-        this.account = data
-        this.fullname = this.account.fullname;
+        this.account=data
+        this.fullname=this.account.fullname;
       }
     )
 
-    this.username = this.authService.getUsername();
+    this.username=this.authService.getUsername();
   }
+
   logout() {
     sessionStorage.clear();
     this.router.navigateByUrl('')

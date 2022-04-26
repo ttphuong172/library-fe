@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StudentService} from "../../../service/student.service";
+import {AccountService} from "../../../service/account.service";
 
 @Component({
   selector: 'app-student-list',
@@ -7,17 +8,18 @@ import {StudentService} from "../../../service/student.service";
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
-  studentList: any
+  borrowerList: any
 
   constructor(
-    private studentService: StudentService
+    private accountService: AccountService
   ) {
   }
+
   ngOnInit(): void {
-    this.studentService.findAll().subscribe(
+    this.accountService.borrowerFindAll().subscribe(
       (data) => {
-        this.studentList = data;
-        console.log(this.studentList);
+        this.borrowerList = data;
+        console.log(this.borrowerList);
       }
     )
   }

@@ -30,6 +30,10 @@ export class RackEditComponent implements OnInit {
     this.libraryService.findAll().subscribe(
       (data) => {
         this.libraryList = data;
+      },
+      ()=>{},
+      ()=>{
+
       }
     )
   }

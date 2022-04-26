@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {StudentService} from "../../../service/student.service";
+import {AccountService} from "../../../service/account.service";
 
 
 @Component({
@@ -9,21 +10,21 @@ import {StudentService} from "../../../service/student.service";
   styleUrls: ['./student-detail.component.css']
 })
 export class StudentDetailComponent implements OnInit {
-  student:any;
+  borrower:any;
   returnedQuantity=0;
   constructor(
     private activatedRoute:ActivatedRoute,
-    private studentService:StudentService
+    private accountService:AccountService
   ) { }
 
   ngOnInit(): void {
     const id = String(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.studentService.findById(id).subscribe(
+    this.accountService.findBorrowerById(id).subscribe(
       (data)=>{
-        this.student=data;
-        console.log(this.student)
-        for (let i=0;i<this.student.bookDTOList.length;i++){
-          if(this.student.bookDTOList[i].returnDate!=null){
+        this.borrower=data;
+        console.log(this.borrower)
+        for (let i=0; i<this.borrower.bookDTOList.length; i++){
+          if(this.borrower.bookDTOList[i].returnDate!=null){
             this.returnedQuantity++;
           }
         }

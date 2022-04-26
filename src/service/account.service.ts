@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {AuthService} from "./auth.service";
@@ -6,56 +6,53 @@ import {AuthService} from "./auth.service";
 @Injectable({
   providedIn: 'root'
 })
-export class RackService {
-  private apiURL = environment.apiURL;
+export class AccountService {
+  private apiURL=environment.apiURL;
   constructor(
-    private httpClient: HttpClient,
+    private httpClient:HttpClient,
     private authService:AuthService
-  ) {
-  }
+  ) { }
 
-  findAll() {
+  findById(id:any){
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': "Bearer " + this.authService.getToken()
       })
     }
-    return this.httpClient.get(this.apiURL+'/api/racks',httpOptions)
+    return this.httpClient.get(this.apiURL+'/api/accounts/' + id,httpOptions);
   }
 
-  findById(id: any) {
+  findByUsername(username:any){
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': "Bearer " + this.authService.getToken()
       })
     }
-    return this.httpClient.get(this.apiURL+'/api/racks/' + id,httpOptions)
+    return this.httpClient.get(this.apiURL+'/api/accounts/username/' + username,httpOptions);
   }
 
-  findAllByLibrary_Name(name: any) {
+  borrowerFindAll(){
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': "Bearer " + this.authService.getToken()
       })
     }
-    return this.httpClient.get(this.apiURL+'/api/racks/library/' + name,httpOptions)
+    return  this.httpClient.get(this.apiURL+'/api/accounts/borrowers',httpOptions);
   }
-
-  save(rack: any) {
+  findBorrowerById(id:any){
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': "Bearer " + this.authService.getToken()
       })
     }
-    return this.httpClient.post(this.apiURL+'/api/racks', rack,httpOptions)
+    return this.httpClient.get(this.apiURL+'/api/accounts/borrowers/' + id,httpOptions);
   }
-
-  update(rack: any) {
+  changePassword(changePasswordDTO:any){
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': "Bearer " + this.authService.getToken()
       })
     }
-    return this.httpClient.put(this.apiURL+'/api/racks/' + rack.id, rack,httpOptions)
+    return this.httpClient.put(this.apiURL+'/api/accounts/changepassword',changePasswordDTO,httpOptions)
   }
 }

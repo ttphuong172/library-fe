@@ -1,0 +1,52 @@
+<div class="container">
+  <div style="margin: 20px 0px">
+    <div class="row">
+      <div class="col-1">ISBN</div>
+      <div class="col-2">
+        <input type="text" class="form-control" (keyup)="isbnKeyup($event)">
+      </div>
+      <div class="col-1">Title</div>
+      <div class="col-2">
+        <input type="text" class="form-control" (keyup)="titleKeyup($event)">
+      </div>
+      <div class="col-1">Publisher</div>
+      <div class="col-2">
+        <input type="text" class="form-control" (keyup)="publisherKeyup($event)">
+      </div>
+      <div class="col-1">Status</div>
+      <div class="col-2">
+        <select name="" id="" class="form-control" (change)="changeStatus($event)">
+          <option *ngFor="let status of statusList" [ngValue]="status">{{status}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3" *ngFor="let book of bookList | paginate: { itemsPerPage: 12, currentPage: p }">
+      <div style="margin: 10px;position: relative">
+        <a>
+          <div style="text-align: center">
+            <div *ngIf="book.cover;then content else other_content">here is ignored</div>
+            <ng-template #content>
+              <img src="{{book.cover}}" style="height: 150px;border: solid 1px  black">
+            </ng-template>
+            <ng-template #other_content>
+              <img src="https://uphinh.vn/images/2022/04/25/c5a853e83e0bbdf8e384d28c4f2085d3.jpg" style="height: 150px;border: solid 1px  black">
+            </ng-template>
+          </div>
+          <p style="text-align: center">{{book.isbn}}</p>
+          <p style="text-align: center;font-weight: bold">{{book.title}}</p>
+          <p style="text-align: center">
+            <span *ngFor="let author of book.authors">{{author.name}}-</span>
+          </p>
+          <p style="text-align: center">{{book.status}}</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: right">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+</div>
+

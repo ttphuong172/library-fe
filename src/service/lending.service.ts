@@ -1,21 +1,39 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../environments/environment";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LendingService {
-
+  private apiURL = environment.apiURL;
   constructor(
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    private authService:AuthService
   ) { }
   findAll(){
-    return this.httpClient.get('http://localhost:8080/api/lendings')
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.get(this.apiURL+'/api/lendings',httpOptions)
   }
   save(lending:any){
-    return this.httpClient.post('http://localhost:8080/api/lendings',lending)
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.post(this.apiURL+'/api/lendings',lending,httpOptions)
   }
   findById(id:any){
-    return this.httpClient.get('http://localhost:8080/api/lendings/'+ id);
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.get(this.apiURL+'/api/lendings/'+ id,httpOptions);
   }
 }

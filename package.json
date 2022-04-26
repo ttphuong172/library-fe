@@ -23,6 +23,7 @@
     "bootstrap": "^4.6.1",
     "html-to-pdfmake": "^2.3.11",
     "jspdf": "^2.5.1",
+    "ngx-pagination": "^5.1.1",
     "pdfmake": "^0.2.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

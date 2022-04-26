@@ -18,6 +18,8 @@
     <th>Name</th>
     <th>Library</th>
     <th style="text-align: center">Quantity</th>
+    <th style="text-align: center">Loaned Quantity</th>
+    <th style="text-align: center">Keeping Quantity</th>
     <th style="text-align: center">Detail</th>
     </thead>
     <tbody>
@@ -25,9 +27,11 @@
       <td>{{i+1}}</td>
       <td>{{rack.name}}</td>
       <td>{{rack.library.name}}</td>
-      <td style="text-align: center">{{rack.bookList.length}}</td>
+      <td style="text-align: center">{{rack.bookQuantity}}</td>
+      <td style="text-align: center">{{rack.loanedBook}}</td>
+      <td style="text-align: center">{{rack.keepingBook}}</td>
       <td style="text-align: center">
-        <button style="background-color: #007bff;border-color: #007bff;color: white" [routerLink]="['/racks', rack.id]">
+        <button style="background-color: #007bff;border-color: #007bff;color: white" [routerLink]="['/admin/racks', rack.id]">
           <i class="fa fa-info-circle"></i>
         </button>
       </td>

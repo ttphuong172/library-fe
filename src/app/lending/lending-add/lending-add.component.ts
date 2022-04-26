@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {StudentService} from "../../../service/student.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {BookService} from "../../../service/book.service";
 import {LendingService} from "../../../service/lending.service";
@@ -9,6 +8,7 @@ import {Router} from "@angular/router";
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import {AccountService} from "../../../service/account.service";
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -19,36 +19,29 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 })
 export class LendingAddComponent implements OnInit {
 
-  studentList: any;
+
   book: any;
-  student: any;
+  account: any;
   bookList: Book[] = [];
   idBook: any;
 
   lendingForm = new FormGroup({
     id: new FormControl(''),
-    student: new FormControl(''),
+    account: new FormControl(''),
     loanDate: new FormControl((new Date()).toISOString().substring(0, 10)),
     bookList: new FormControl()
   })
 
   constructor(
-    private studentService: StudentService,
     private bookService: BookService,
     private lendingService: LendingService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private accountService:AccountService
   ) {
   }
 
   ngOnInit(): void {
-    this.studentService.findAll().subscribe(
-      (data) => {
-        this.studentList = data;
-        console.log(this.studentList)
-
-      }
-    )
   }
 
   searchBook($event: any) {
@@ -93,7 +86,7 @@ export class LendingAddComponent implements OnInit {
       () => {
       },
       () => {
-        this.router.navigateByUrl("/lendings");
+        this.router.navigateByUrl("/admin/lendings");
         // this.lendingPDF();
       }
     )
@@ -117,16 +110,15 @@ export class LendingAddComponent implements OnInit {
   }
 
 
-  searchStudent($event: any) {
+  searchAccount($event: any) {
     let id = $event.target.value;
-    this.studentService.findById(id).subscribe(
+    this.accountService.findById(id).subscribe(
       (data) => {
-        this.student = data;
-        this.lendingForm.controls['student'].setValue(data);
+        this.account = data;
+        this.lendingForm.controls['account'].setValue(data);
       }
     )
   }
-
 
   returnLending() {
     this.router.navigateByUrl("/lendings")

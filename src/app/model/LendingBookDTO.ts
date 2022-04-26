@@ -3,6 +3,6 @@ export interface LendingBookDTO{
   book_id:String;
   book_isbn:String;
   book_title:String;
-  student_name:String;
+  accountName:String;
   loanDate:String;
 }
