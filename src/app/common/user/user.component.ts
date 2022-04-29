@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.findByUsername(this.authService.getUsername()).subscribe(
+    this.accountService.findById(this.authService.getUsername()).subscribe(
       (data)=>{
         console.log(data);
         this.account=data

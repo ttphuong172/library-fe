@@ -9,6 +9,7 @@ import {AccountService} from "../../../service/account.service";
 })
 export class StudentListComponent implements OnInit {
   borrowerList: any
+  p=1;
 
   constructor(
     private accountService: AccountService
@@ -19,7 +20,7 @@ export class StudentListComponent implements OnInit {
     this.accountService.borrowerFindAll().subscribe(
       (data) => {
         this.borrowerList = data;
-        console.log(this.borrowerList);
+        // console.log(this.borrowerList);
       }
     )
   }

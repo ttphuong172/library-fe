@@ -22,7 +22,7 @@ export class RackListComponent implements OnInit {
     this.rackService.findAll().subscribe(
       (data) => {
         this.rackList = data;
-        console.log(this.rackList)
+        // console.log(this.rackList)
       }
     )
   }

@@ -46,6 +46,16 @@ export class BookService {
     return this.httpClient.get(this.apiURL + '/api/books/' + id,httpOptions);
   }
 
+  findDetailById(id: any) {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.get(this.apiURL + '/api/books/detail/' + id,httpOptions);
+  }
+
+
   findAllByRack_Id(id: any) {
     let httpOptions = {
       headers: new HttpHeaders({
@@ -62,6 +72,15 @@ export class BookService {
       })
     }
     return this.httpClient.delete(this.apiURL + '/api/books/' + id,httpOptions)
+  }
+
+  update(book:any){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.put(this.apiURL+'/api/books/' + book.id, book,httpOptions)
   }
 
   search(isbn: any, title: any, publisher: any, status: any) {

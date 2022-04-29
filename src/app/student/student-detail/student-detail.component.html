@@ -4,7 +4,7 @@
       <div class="col-2">
         <label>Borrower ID</label>
       </div>
-      <div class="col-5">{{borrower.id}}</div>
+      <div class="col-5">{{borrower.code}}</div>
       <div class="col-5"></div>
     </div>
     <div class="row">
@@ -34,38 +34,41 @@
     <div>
       <table class="table table-bordered">
         <thead>
-        <th>Order</th>
-        <th>Book ID</th>
-        <th>ISBN</th>
+        <th style="text-align: center">Order</th>
+        <th style="text-align: center">Book ID</th>
+        <th style="text-align: center">ISBN</th>
         <th>Title</th>
-        <th>Author</th>
-        <th>Number Of Pages</th>
-        <th>Publish Date</th>
-        <th>Publisher</th>
+        <th style="text-align: center">Author</th>
+        <th style="text-align: center">Number Of Pages</th>
+        <th style="text-align: center">Publish Date</th>
+        <th style="text-align: center">Publisher</th>
         <th>Rack</th>
         <th>Loan Date</th>
         <th>Return Date</th>
         </thead>
         <tbody>
-        <tr *ngFor="let book of borrower.bookDTOList;index as i">
-          <td>{{i +1}}</td>
-          <td>{{book.id}}</td>
-          <td>{{book.isbn}}</td>
+        <tr *ngFor="let book of borrower.bookDTOList | paginate: { itemsPerPage: 10, currentPage: p };index as i">
+          <td style="text-align: center">{{i +1}}</td>
+          <td style="text-align: center">{{book.id}}</td>
+          <td style="text-align: center">{{book.isbn}}</td>
           <td>{{book.title}}</td>
-          <td>
+          <td style="text-align: center">
         <span *ngFor="let author of book.authors">
           <span>{{author.name}}</span>
         </span>
           </td>
-          <td>{{book.number_of_pages}}</td>
-          <td>{{book.publish_date}}</td>
-          <td>{{book.publisher}}</td>
+          <td style="text-align: center">{{book.number_of_pages}}</td>
+          <td style="text-align: center">{{book.publish_date}}</td>
+          <td style="text-align: center">{{book.publisher}}</td>
           <td>{{book.rack.name}} - {{book.rack.library.name}}</td>
           <td>{{book.loanDate | date: 'dd/MM/yyyy'}}</td>
           <td>{{book.returnDate | date: 'dd/MM/yyyy'}}</td>
         </tr>
         </tbody>
       </table>
+      <div style="text-align: right">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
     </div>
 
 

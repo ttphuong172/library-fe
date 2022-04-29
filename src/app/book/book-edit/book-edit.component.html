@@ -102,7 +102,10 @@
     </div>
     <div class="col-4" style="text-align: center">
       <input hidden type="text" formControlName="cover" #username>
-      <img src="{{username.value}}" alt="">
+      <img src="{{username.value}}" alt="" style="width: 180px;height: 260px">
+      <div>
+        <input type="file" id="img" name="img" accept="image/*" (change)="selectFile($event)">
+      </div>
     </div>
   </div>
 </form>
@@ -120,4 +123,4 @@
   </div>
 </div>
 
-{{bookForm.value | json}}
+<!--{{bookForm.value | json}}-->

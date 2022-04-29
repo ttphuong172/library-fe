@@ -14,8 +14,8 @@
   </div>
   <table class="table table-bordered table-striped">
     <thead>
-    <th>Order</th>
-    <th>Name</th>
+    <th style="text-align: center">Order</th>
+    <th style="text-align: center">Name</th>
     <th>Library</th>
     <th style="text-align: center">Quantity</th>
     <th style="text-align: center">Loaned Quantity</th>
@@ -24,8 +24,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let rack of rackList; index as i">
-      <td>{{i+1}}</td>
-      <td>{{rack.name}}</td>
+      <td style="text-align: center">{{i+1}}</td>
+      <td style="text-align: center">{{rack.name}}</td>
       <td>{{rack.library.name}}</td>
       <td style="text-align: center">{{rack.bookQuantity}}</td>
       <td style="text-align: center">{{rack.loanedBook}}</td>

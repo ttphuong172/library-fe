@@ -32,7 +32,7 @@ export class ReturnCreateComponent implements OnInit {
       this.lendingbookService.findAllByBook_IdAndReturnDateIsNull(id).subscribe(
         (data) => {
           this.lendingBookDTO = data;
-          console.log(this.lendingBookDTO)
+          // console.log(this.lendingBookDTO)
           //Test book inserted into bookList
           let isExist = false;
           for (let i = 0; i < this.lendingBookDTOList.length; i++) {
@@ -48,7 +48,7 @@ export class ReturnCreateComponent implements OnInit {
             this.snackBar.open("Book is already on the list!", 'Undo', {duration: 1500});
           }
         },
-        (data) => {
+        () => {
           this.snackBar.open("Book is not exist!", 'Undo', {duration: 1500});
         }
       )

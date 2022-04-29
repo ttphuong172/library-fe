@@ -19,6 +19,7 @@ export class BookListComponent implements OnInit {
   publisher = '';
   status='';
   statusList:string[]=['','AVAILABLE','LOANED'];
+  p=1;
 
   constructor(
     private bookService: BookService,

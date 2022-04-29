@@ -24,18 +24,22 @@
     <th style="text-align: center">Details</th>
     </thead>
     <tbody>
-    <tr *ngFor="let lending of lendingList;index as i">
+    <tr *ngFor="let lending of lendingList |  paginate: { itemsPerPage: 10, currentPage: p };index as i">
       <td style="text-align: center">{{i + 1}}</td>
 <!--      <td style="text-align: center">{{lending.id}}</td>-->
       <td>{{lending.account.fullname}}</td>
       <td style="text-align: center">{{lending.loanDate | date: 'dd/MM/yyyy '}}</td>
       <td style="text-align: center">{{lending.bookList.length}}</td>
       <td style="text-align: center">
-        <button [routerLink]="[lending.id]" class="btn btn-primary">
-          Detail
+        <button [routerLink]="[lending.id]" style="background-color: #007bff;border-color: #007bff;color: white">
+          <i class="fa fa-info-circle"></i>
         </button>
       </td>
     </tr>
     </tbody>
   </table>
+  <div style="text-align: right">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+
 </div>

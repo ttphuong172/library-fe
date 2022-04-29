@@ -18,23 +18,26 @@
     <th style="text-align: center">Order</th>
 <!--    <th>LendingBook ID</th>-->
     <th style="text-align: center">Book ID</th>
-    <th>Book ISBN</th>
+    <th style="text-align: center">Book ISBN</th>
     <th>Book Title</th>
     <th>Borrower Name</th>
-    <th>Loan Date</th>
-    <th>Return Date</th>
+    <th style="text-align: center">Loan Date</th>
+    <th style="text-align: center">Return Date</th>
     </thead>
     <tbody>
-    <tr *ngFor="let lendingBookDTO of lendingBookDTOList; index as i">
+    <tr *ngFor="let lendingBookDTO of lendingBookDTOList | paginate: { itemsPerPage: 10, currentPage: p }; index as i">
       <td style="text-align: center">{{i + 1}}</td>
 <!--      <td>{{lendingBookDTO.id}}</td>-->
       <td style="text-align: center">{{lendingBookDTO.book_id}}</td>
-      <td>{{lendingBookDTO.book_isbn}}</td>
+      <td style="text-align: center">{{lendingBookDTO.book_isbn}}</td>
       <td>{{lendingBookDTO.book_title}}</td>
       <td>{{lendingBookDTO.accountName}}</td>
-      <td>{{lendingBookDTO.loanDate }}</td>
-      <td>{{lendingBookDTO.returnDate }}</td>
+      <td style="text-align: center">{{lendingBookDTO.loanDate }}</td>
+      <td style="text-align: center">{{lendingBookDTO.returnDate }}</td>
     </tr>
     </tbody>
   </table>
+  <div style="text-align: right">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>

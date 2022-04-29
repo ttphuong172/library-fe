@@ -12,6 +12,8 @@ export class LendingbookService {
     private httpClient:HttpClient,
     private authService:AuthService
   ) { }
+
+  // Get book not yet return
   findAllByBook_IdAndReturnDateIsNull(id:any){
     let httpOptions = {
       headers: new HttpHeaders({
@@ -20,6 +22,9 @@ export class LendingbookService {
     }
     return this.httpClient.get(this.apiURL+'/api/lendingbooks/books/'+id,httpOptions);
   }
+
+
+  //Get list returned
   findAllByReturnDateIsNotNull(){
     let httpOptions = {
       headers: new HttpHeaders({
@@ -28,6 +33,7 @@ export class LendingbookService {
     }
     return  this.httpClient.get(this.apiURL+'/api/lendingbooks',httpOptions);
   }
+
   comfirmReturn(lendingBookDTOList:any){
     let httpOptions = {
       headers: new HttpHeaders({

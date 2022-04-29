@@ -47,7 +47,7 @@ export class BookAddComponent implements OnInit {
     this.libraryService.findAll().subscribe(
       (data)=>{
         this.libraryList=data;
-        console.log(this.libraryList)
+        // console.log(this.libraryList)
       }
     )
   }
@@ -86,7 +86,7 @@ export class BookAddComponent implements OnInit {
     this.bookService.searchBookByISBN(this.bookForm.controls['isbn'].value).subscribe(
       (data) => {
         this.bookTempAPI = data;
-        console.log(this.bookTempAPI);
+        // console.log(this.bookTempAPI);
         const isbnForm = this.bookForm.controls['isbn'].value;
 
         if (this.bookTempAPI["ISBN:" + isbnForm]) {
@@ -152,11 +152,11 @@ export class BookAddComponent implements OnInit {
 
   changeLibrary($event: any) {
     this.nameLibrarySelected = $event.target.selectedOptions[0].innerHTML;
-    console.log(this.nameLibrarySelected)
+    // console.log(this.nameLibrarySelected)
     this.rackService.findAllByLibrary_Name(this.nameLibrarySelected).subscribe(
       (data)=>{
         this.rackList=data;
-        console.log(this.rackList)
+        // console.log(this.rackList)
       }
     )
   }

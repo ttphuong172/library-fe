@@ -3,6 +3,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {LibraryService} from "../../../service/library.service";
 import {RackService} from "../../../service/rack.service";
+import {BookService} from "../../../service/book.service";
+import {finalize} from "rxjs/operators";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 @Component({
   selector: 'app-book-edit',
@@ -20,13 +23,18 @@ export class BookEditComponent implements OnInit {
   nameLibrarySelected: any;
   rackList: any;
 
+  url: string | any;
+  selectedFile: File | any;
+
 
   constructor(
     public dialogRefEdit: MatDialogRef<BookEditComponent>,
     private formBuilder: FormBuilder,
-    private libraryService:LibraryService,
-    private rackService:RackService,
-    @Inject(MAT_DIALOG_DATA) public data:any
+    private libraryService: LibraryService,
+    private rackService: RackService,
+    private bookService: BookService,
+    private angularFireStorage: AngularFireStorage,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
   }
 
@@ -50,13 +58,16 @@ export class BookEditComponent implements OnInit {
     }
 
     this.libraryService.findAll().subscribe(
-      (data)=>{
-        this.libraryList=data;
+      (data) => {
+        this.libraryList = data;
       },
-      ()=>{},
-      ()=>{
+      () => {
+      },
+      () => {
         this.rackService.findAll().subscribe(
-          (data)=>{this.rackList=data}
+          (data) => {
+            this.rackList = data
+          }
         )
       }
     )
@@ -64,16 +75,42 @@ export class BookEditComponent implements OnInit {
   }
 
   update() {
+    this.bookService.update(this.bookForm.value).subscribe(
+      () => {
+      },
+      () => {
+      },
+      () => {
+        this.dialogRefEdit.close();
+      }
+    )
+  }
 
+  selectFile(event: any) {
+    const path = new Date().toString();
+    this.selectedFile = event.target.files[0]
+    // console.log(this.selectedFile)
+    this.angularFireStorage.upload(path, this.selectedFile)
+      .snapshotChanges().pipe(
+      finalize(() => {
+        this.angularFireStorage.ref(path).getDownloadURL().subscribe(
+          (data) => {
+            this.url = data;
+            // console.log(this.url)
+            this.bookForm.controls['cover'].setValue(this.url)
+          }
+        )
+      })
+    ).subscribe();
   }
 
   changeLibrary($event: any) {
     this.nameLibrarySelected = $event.target.selectedOptions[0].innerHTML;
-    console.log(this.nameLibrarySelected)
+    // console.log(this.nameLibrarySelected)
     this.rackService.findAllByLibrary_Name(this.nameLibrarySelected).subscribe(
-      (data)=>{
-        this.rackList=data;
-        console.log(this.rackList)
+      (data) => {
+        this.rackList = data;
+        // console.log(this.rackList)
       }
     )
   }
@@ -105,7 +142,8 @@ export class BookEditComponent implements OnInit {
   removeAuthor(index: number) {
     this.authors.removeAt(index);
   }
-  compareByID(obj1:any,obj2:any) {
-    return obj1 && obj2 && obj1.id==obj2.id
+
+  compareByID(obj1: any, obj2: any) {
+    return obj1 && obj2 && obj1.id == obj2.id
   }
 }

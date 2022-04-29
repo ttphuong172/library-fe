@@ -39,6 +39,9 @@ import {UserGuard} from "../service/user.guard";
 import { AccountDetailUserComponent } from './student/account-detail-user/account-detail-user.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { PasswordComponent } from './common/password/password.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 
 
 @NgModule({
@@ -89,7 +92,7 @@ import { PasswordComponent } from './common/password/password.component';
           {path: "racks", component: RackListComponent},
           {path: "racks/:id", component: RackDetailComponent},
           {path: "students", component: StudentListComponent},
-          {path: "students/:id", component: StudentDetailComponent},
+          {path: "students/:username", component: StudentDetailComponent},
           {
             path: "lendings", component: LendingComponent, children: [
               {path: "", component: LendingListComponent},
@@ -113,7 +116,9 @@ import { PasswordComponent } from './common/password/password.component';
       }
     ]),
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

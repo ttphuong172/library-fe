@@ -31,7 +31,7 @@ export class RackDetailComponent implements OnInit {
     this.rackService.findById(id).subscribe(
       (data) => {
         this.rack = data;
-        console.log(this.rack)
+        // console.log(this.rack)
       },
       () => {
       },
@@ -39,7 +39,7 @@ export class RackDetailComponent implements OnInit {
         this.bookService.findAllByRack_Id(id).subscribe(
           (data) => {
             this.bookList = data;
-            console.log(this.bookList)
+            // console.log(this.bookList)
             for (let i = 0; i < this.bookList.length; i++) {
               if (this.bookList[i].status == 'LOANED') {
                 this.quantityLoan++;

@@ -8,6 +8,9 @@ import {MatDialog} from "@angular/material/dialog";
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import {BookEditComponent} from "../book-edit/book-edit.component";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {finalize} from "rxjs/operators";
+
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -16,30 +19,28 @@ import {BookEditComponent} from "../book-edit/book-edit.component";
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
-  book:any;
+  book: any;
   lendingBookDTO: any;
+  p = 1;
+
+
   constructor(
-    private activatedRoute:ActivatedRoute,
-    private bookService:BookService,
-    private lendingbookService:LendingbookService,
-    private matDialog:MatDialog
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private bookService: BookService,
+    private lendingbookService: LendingbookService,
+    private matDialog: MatDialog,
+
+  ) {
+  }
 
   ngOnInit(): void {
     const id = String(this.activatedRoute.snapshot.paramMap.get('id'));
 
 
-
-    this.bookService.findById(id).subscribe(
-      (data)=>{
-        this.book=data;
-      },()=>{},()=>{
-        this.lendingbookService.findAllByBook_IdAndReturnDateIsNull(id).subscribe(
-          (data)=>{
-            // console.log(data);
-            this.lendingBookDTO=data;
-          }
-        );
+    this.bookService.findDetailById(id).subscribe(
+      (data) => {
+        this.book = data;
+        // console.log(this.book)
       }
     )
   }
@@ -61,7 +62,7 @@ export class BookDetailComponent implements OnInit {
     )
   }
 
-  openDialogEdit(book:any) {
+  openDialogEdit(book: any) {
     const dialogRefEdit = this.matDialog.open(BookEditComponent, {
       width: '1000px',
       data: book,
@@ -77,4 +78,7 @@ export class BookDetailComponent implements OnInit {
       }
     )
   }
+
+
+
 }

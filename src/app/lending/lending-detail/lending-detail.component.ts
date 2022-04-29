@@ -15,6 +15,7 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 export class LendingDetailComponent implements OnInit {
   lending: any;
   green='green';
+  p=1;
 
 
 
@@ -29,7 +30,7 @@ export class LendingDetailComponent implements OnInit {
     this.lendingService.findById(id).subscribe(
       (data) => {
         this.lending = data;
-        console.log(this.lending)
+        // console.log(this.lending)
       }
     )
   }

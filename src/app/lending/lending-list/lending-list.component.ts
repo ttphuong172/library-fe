@@ -10,6 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class LendingListComponent implements OnInit {
   lendingList:any;
+  p=1;
   constructor(
     private lendingService:LendingService,
     private matDialog:MatDialog
@@ -17,7 +18,10 @@ export class LendingListComponent implements OnInit {
 
   ngOnInit(): void {
     this.lendingService.findAll().subscribe(
-      (data)=>{this.lendingList=data;console.log(this.lendingList)}
+      (data)=>{
+        this.lendingList=data;
+        // console.log(this.lendingList)
+      }
     )
   }
 

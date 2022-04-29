@@ -111,8 +111,8 @@ export class LendingAddComponent implements OnInit {
 
 
   searchAccount($event: any) {
-    let id = $event.target.value;
-    this.accountService.findById(id).subscribe(
+    let code = $event.target.value;
+    this.accountService.findByCode(code).subscribe(
       (data) => {
         this.account = data;
         this.lendingForm.controls['account'].setValue(data);
@@ -121,7 +121,7 @@ export class LendingAddComponent implements OnInit {
   }
 
   returnLending() {
-    this.router.navigateByUrl("/lendings")
+    this.router.navigateByUrl("/admin/lendings")
   }
 
 

@@ -8,6 +8,7 @@ import {LendingbookService} from "../../../service/lendingbook.service";
 })
 export class ReturnListComponent implements OnInit {
   lendingBookDTOList:any;
+  p=1;
   constructor(
     private lendingbookService:LendingbookService
   ) { }
@@ -16,7 +17,7 @@ export class ReturnListComponent implements OnInit {
     this.lendingbookService.findAllByReturnDateIsNotNull().subscribe(
       (data)=>{
         this.lendingBookDTOList=data;
-        console.log(this.lendingBookDTOList)
+        // console.log(this.lendingBookDTOList)
       }
     )
   }

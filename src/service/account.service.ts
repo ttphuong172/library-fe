@@ -22,13 +22,13 @@ export class AccountService {
     return this.httpClient.get(this.apiURL+'/api/accounts/' + id,httpOptions);
   }
 
-  findByUsername(username:any){
+  findByCode(code:any){
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': "Bearer " + this.authService.getToken()
       })
     }
-    return this.httpClient.get(this.apiURL+'/api/accounts/username/' + username,httpOptions);
+    return this.httpClient.get(this.apiURL+'/api/accounts/code/' + code,httpOptions);
   }
 
   borrowerFindAll(){

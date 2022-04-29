@@ -23,9 +23,9 @@ export class AdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.findByUsername(this.authService.getUsername()).subscribe(
+    this.accountService.findById(this.authService.getUsername()).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.account = data
         this.fullname = this.account.fullname;
       }

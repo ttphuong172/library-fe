@@ -11,7 +11,7 @@ import {AuthService} from "../../../service/auth.service";
 export class AccountDetailUserComponent implements OnInit {
   borrower:any;
   account:any;
-  id:any;
+  username:any;
   returnedQuantity=0;
 
   constructor(
@@ -22,23 +22,23 @@ export class AccountDetailUserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.accountService.findByUsername(this.authService.getUsername()).subscribe(
+    this.accountService.findById(this.authService.getUsername()).subscribe(
       (data)=>{
-        console.log(data);
+        // console.log(data);
         this.account=data;
-        this.id=this.account.id
+        this.username=this.account.username
       },()=>{},()=>{
 
-        this.accountService.findBorrowerById(this.id).subscribe(
+        this.accountService.findBorrowerById(this.username).subscribe(
           (data)=>{
             this.borrower=data;
-            console.log(this.borrower)
+            // console.log(this.borrower)
             for (let i=0; i<this.borrower.bookDTOList.length; i++){
               if(this.borrower.bookDTOList[i].returnDate!=null){
                 this.returnedQuantity++;
               }
             }
-            console.log(this.returnedQuantity)
+            // console.log(this.returnedQuantity)
           }
         )
 
