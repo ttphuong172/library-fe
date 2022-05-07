@@ -1,0 +1,54 @@
+<div class="container" *ngIf="account">
+  <div style="display: flex;justify-content: space-between">
+    <div>
+      <h3>Detail of account</h3>
+    </div>
+    <div style="display: flex;justify-content: flex-end">
+      <div  style="margin-right: 5px">
+        <button (click)="openDialogEdit()">
+          <i class="fa fa-edit"></i>
+        </button>
+      </div>
+      <div>
+        <button style="background-color: #c82333; border-color: #c82333;color: white" (click)="openDialogDelete()">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-10" style="font-size: large">
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-2">Code</div>
+        <div class="col-10">{{account.code}}</div>
+      </div>
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-2">Username</div>
+        <div class="col-10">{{account.username}}</div>
+      </div>
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-2">Password</div>
+        <div class="col-10">**********</div>
+      </div>
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-2">Fullname</div>
+        <div class="col-10">{{account.fullname}}</div>
+      </div>
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-2">Position</div>
+        <div class="col-10">{{account.position}}</div>
+      </div>
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-2">Role</div>
+        <div class="col-10">{{account.role}}</div>
+      </div>
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-2">Enable</div>
+        <div class="col-10">{{account.enable}}</div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -69,7 +69,7 @@ export class LendingDetailComponent implements OnInit {
           ]
         },
         {
-          text: 'Borrower ID:' + this.lending.account.id,
+          text: 'Borrower ID:' + this.lending.account.code,
           fontSize: 8
         },
         {

@@ -16,6 +16,12 @@ export class RackDetailComponent implements OnInit {
   bookList: any;
   quantityLoan = 0;
   quantityAvailable = 0;
+  p = 1;
+  statusList: string[] = ['', 'AVAILABLE', 'LOANED'];
+  isbn = '';
+  title = '';
+  publisher = '';
+  status = '';
 
   constructor(
     private bookService: BookService,
@@ -56,7 +62,7 @@ export class RackDetailComponent implements OnInit {
   openDialogAdd() {
     const dialogRefAdd = this.matDialog.open(BookAddRackComponent, {
       width: '1000px',
-      data:this.rack,
+      data: this.rack,
       disableClose: true
     })
     dialogRefAdd.afterClosed().subscribe(
@@ -73,7 +79,7 @@ export class RackDetailComponent implements OnInit {
   openDialogEdit() {
     const dialogRefEdit = this.matDialog.open(RackEditComponent, {
       width: '600px',
-      data:this.rack,
+      data: this.rack,
       disableClose: true
     })
     dialogRefEdit.afterClosed().subscribe(
@@ -83,6 +89,33 @@ export class RackDetailComponent implements OnInit {
       },
       () => {
         this.ngOnInit();
+      }
+    )
+  }
+
+  isbnKeyup($event: any) {
+    this.isbn=$event.target.value;
+    this.search();
+  }
+
+  titleKeyup($event: any) {
+    this.title=$event.target.value;
+    this.search();
+  }
+
+  publisherKeyup($event: any) {
+    this.publisher=$event.target.value;
+    this.search();
+  }
+
+  changeStatus($event: any) {
+    this.status = $event.target.value;
+    this.search()
+  }
+  search(){
+    this.bookService.search(this.isbn, this.title, this.publisher, this.status, this.rack.library.id, this.rack.id).subscribe(
+      (data) => {
+        this.bookList = data;
       }
     )
   }

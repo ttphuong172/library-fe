@@ -83,12 +83,12 @@ export class BookService {
     return this.httpClient.put(this.apiURL+'/api/books/' + book.id, book,httpOptions)
   }
 
-  search(isbn: any, title: any, publisher: any, status: any) {
+  search(isbn: any, title: any, publisher: any, status: any,idLibrary:any,idRack:any) {
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': "Bearer " + this.authService.getToken()
       })
     }
-    return this.httpClient.get(this.apiURL + '/api/books/search/?isbn=' + isbn + '&title=' + title + '&publisher=' + publisher + '&status=' + status,httpOptions)
+    return this.httpClient.get(this.apiURL + '/api/books/search/?isbn=' + isbn + '&title=' + title + '&publisher=' + publisher + '&status=' + status + '&idLibrary=' + idLibrary + '&idRack=' + idRack,httpOptions)
   }
 }

@@ -1,0 +1,81 @@
+<div>
+  <form [formGroup]="accountForm">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-8">
+      <div class="row" style="margin-bottom: 5px">
+        <div class="col-2">
+          <label>Code</label>
+        </div>
+        <div class="col-10">
+          <input type="text" class="form-control" formControlName="code">
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px">
+        <div class="col-2">
+          <label>Username</label>
+        </div>
+        <div class="col-10">
+          <input type="text" class="form-control" formControlName="username">
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px">
+        <div class="col-2">
+          <label>Fullname</label>
+        </div>
+        <div class="col-10">
+          <input type="text" class="form-control" formControlName="fullname">
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px">
+        <div class="col-2">
+          <label>Password</label>
+        </div>
+        <div class="col-10">
+          <input type="text" class="form-control" formControlName="password">
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px">
+        <div class="col-2">
+          <label>Position</label>
+        </div>
+        <div class="col-4">
+          <select name="" class="form-control" formControlName="position">
+            <option value=""></option>
+            <option value="" *ngFor="let position of positionList" [ngValue]="position">{{position}}</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <label>Role</label>
+        </div>
+        <div class="col-4">
+          <select name="" class="form-control" formControlName="role">
+            <option value=""></option>
+            <option value="" *ngFor="let role of roleList"  [ngValue]="role">{{role}}</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </form>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2">
+      <button style="width: 100%" class="btn btn-primary" [disabled]="!accountForm.valid" (click)="save()">Save</button>
+    </div>
+    <div class="col-2">
+      <button style="width: 100%" class="btn btn-light" (click)="closeDialogAdd()"> Close</button>
+    </div>
+  </div>
+</div>
+
+<!--{{accountForm.value | json}}-->

@@ -16,12 +16,12 @@ import {RackListComponent} from './rack/rack-list/rack-list.component';
 import {RackDetailComponent} from './rack/rack-detail/rack-detail.component';
 import {RouterModule} from "@angular/router";
 import {BookDetailComponent} from './book/book-detail/book-detail.component';
-import {StudentListComponent} from './student/student-list/student-list.component';
+import {BorrowerListComponent} from './borrower/borrower-list/borrower-list.component';
 import {LendingListComponent} from './lending/lending-list/lending-list.component';
 import {LendingAddComponent} from './lending/lending-add/lending-add.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {LendingDetailComponent} from './lending/lending-detail/lending-detail.component';
-import {StudentDetailComponent} from './student/student-detail/student-detail.component';
+import {BorrowerDetailComponent} from './borrower/borrower-detail/borrower-detail.component';
 import {ReturnCreateComponent} from './return/return-create/return-create.component';
 import {ReturnListComponent} from './return/return-list/return-list.component';
 import {ReturnComponent} from './return/return/return.component';
@@ -36,12 +36,20 @@ import {AdminGuard} from "../service/admin.guard";
 import { UserComponent } from './common/user/user.component';
 import { BookListUserComponent } from './book/book-list-user/book-list-user.component';
 import {UserGuard} from "../service/user.guard";
-import { AccountDetailUserComponent } from './student/account-detail-user/account-detail-user.component';
+import { BorrowerDetailUserComponent } from './borrower/borrower-detail-user/borrower-detail-user.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { PasswordComponent } from './common/password/password.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import { LibraryListComponent } from './library/library-list/library-list.component';
+import { LibraryDetailComponent } from './library/library-detail/library-detail.component';
+import { AccountComponent } from './student/account/account.component';
+import { AccountListComponent } from './student/account-list/account-list.component';
+import { AccountAddComponent } from './student/account-add/account-add.component';
+import { AccountDetailComponent } from './student/account-detail/account-detail.component';
+import { AccountEditComponent } from './student/account-edit/account-edit.component';
+import { AccountDeleteComponent } from './student/account-delete/account-delete.component';
 
 
 @NgModule({
@@ -53,11 +61,11 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     RackListComponent,
     RackDetailComponent,
     BookDetailComponent,
-    StudentListComponent,
+    BorrowerListComponent,
     LendingListComponent,
     LendingAddComponent,
     LendingDetailComponent,
-    StudentDetailComponent,
+    BorrowerDetailComponent,
     ReturnCreateComponent,
     ReturnListComponent,
     ReturnComponent,
@@ -70,8 +78,16 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     LoginComponent,
     UserComponent,
     BookListUserComponent,
-    AccountDetailUserComponent,
-    PasswordComponent
+    BorrowerDetailUserComponent,
+    PasswordComponent,
+    LibraryListComponent,
+    LibraryDetailComponent,
+    AccountComponent,
+    AccountListComponent,
+    AccountAddComponent,
+    AccountDetailComponent,
+    AccountEditComponent,
+    AccountDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -89,10 +105,12 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
         path: "admin", component: AdminComponent, canActivate: [AdminGuard], children: [
           {path: "books", component: BookListComponent},
           {path: "books/:id", component: BookDetailComponent},
+          {path: "libraries",component: LibraryListComponent},
+          {path: "libraries/:name",component: LibraryDetailComponent},
           {path: "racks", component: RackListComponent},
           {path: "racks/:id", component: RackDetailComponent},
-          {path: "students", component: StudentListComponent},
-          {path: "students/:username", component: StudentDetailComponent},
+          {path: "borrowers", component: BorrowerListComponent},
+          {path: "borrowers/:username", component: BorrowerDetailComponent},
           {
             path: "lendings", component: LendingComponent, children: [
               {path: "", component: LendingListComponent},
@@ -105,13 +123,19 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
               {path: "", component: ReturnListComponent},
               {path: "add", component: ReturnCreateComponent}
             ]
+          },
+          {
+            path:"accounts",component: AccountComponent,children:[
+              {path:"",component: AccountListComponent},
+              {path:":username",component: AccountDetailComponent}
+            ]
           }
         ]
       },
       {
         path: "", component: UserComponent, canActivate: [UserGuard], children: [
           {path: "books", component: BookListUserComponent},
-          {path: "borrowed", component: AccountDetailUserComponent}
+          {path: "borrowed", component: BorrowerDetailUserComponent}
         ]
       }
     ]),

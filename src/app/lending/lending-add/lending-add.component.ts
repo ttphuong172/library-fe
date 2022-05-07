@@ -46,7 +46,7 @@ export class LendingAddComponent implements OnInit {
 
   searchBook($event: any) {
     let id = $event.target.value;
-    console.log(id)
+    // console.log(id)
     this.bookService.findById(id).subscribe(
       (data) => {
         if (data) {

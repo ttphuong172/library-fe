@@ -13,7 +13,7 @@
     <div class="col-2"></div>
     <div class="col-2"></div>
   </div>
-  <table class="table table-bordered">
+  <table class="table table-bordered table-striped">
     <thead>
     <th style="text-align: center">Order</th>
 <!--    <th>LendingBook ID</th>-->
@@ -32,8 +32,8 @@
       <td style="text-align: center">{{lendingBookDTO.book_isbn}}</td>
       <td>{{lendingBookDTO.book_title}}</td>
       <td>{{lendingBookDTO.accountName}}</td>
-      <td style="text-align: center">{{lendingBookDTO.loanDate }}</td>
-      <td style="text-align: center">{{lendingBookDTO.returnDate }}</td>
+      <td style="text-align: center">{{lendingBookDTO.loanDate | date: 'dd/MM/yyyy'}}</td>
+      <td style="text-align: center">{{lendingBookDTO.returnDate |date: 'dd/MM/yyyy'}}</td>
     </tr>
     </tbody>
   </table>

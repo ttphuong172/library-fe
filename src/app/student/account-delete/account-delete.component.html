@@ -1,0 +1,19 @@
+<div>
+  <p>Do you want delete account {{data.username}}</p>
+</div>
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-2"></div>
+  <div class="col-2"></div>
+  <div class="col-2"></div>
+  <div class="col-2">
+    <button style="width: 100%" class="btn btn-danger" (click)="delete(data)">
+      Yes
+    </button>
+  </div>
+  <div class="col-2">
+    <button style="width: 100%" class="btn btn-light" (click)="closeDialogDelete()">
+      No
+    </button>
+  </div>
+</div>

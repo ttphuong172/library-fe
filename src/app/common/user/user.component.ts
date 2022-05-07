@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.findById(this.authService.getUsername()).subscribe(
       (data)=>{
-        console.log(data);
+        // console.log(data);
         this.account=data
         this.fullname=this.account.fullname;
       }

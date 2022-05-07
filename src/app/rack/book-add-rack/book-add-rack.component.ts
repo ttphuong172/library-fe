@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {BookService} from "../../../service/book.service";
-import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-book-add',
@@ -14,11 +15,13 @@ export class BookAddRackComponent implements OnInit {
   cover = '';
   number_of_pages = 0;
   subtitle = '';
+  book:any;
 
   constructor(
     private bookService: BookService,
     private formBuilder: FormBuilder,
     public dialogRefAdd: MatDialogRef<BookAddRackComponent>,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data:any
   ) {
   }
@@ -27,16 +30,16 @@ export class BookAddRackComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookForm = new FormGroup({
-      isbn: new FormControl(''),
-      id: new FormControl(''),
-      title: new FormControl(''),
+      isbn: new FormControl('',Validators.required),
+      id: new FormControl('',Validators.required),
+      title: new FormControl('',Validators.required),
       cover: new FormControl(''),
-      authors: this.formBuilder.array([]),
-      publisher: new FormControl(''),
-      number_of_pages: new FormControl(''),
-      publish_date: new FormControl(''),
-      library: new FormControl(this.data.library),
-      rack: new FormControl(this.data),
+      authors: this.formBuilder.array([],Validators.required),
+      publisher: new FormControl('',Validators.required),
+      number_of_pages: new FormControl('',Validators.required),
+      publish_date: new FormControl('',Validators.required),
+      library: new FormControl(this.data.library,Validators.required),
+      rack: new FormControl(this.data,Validators.required),
     });
   }
 
@@ -122,12 +125,19 @@ export class BookAddRackComponent implements OnInit {
 
   save() {
     this.bookService.save(this.bookForm.value).subscribe(
-      () => {
+      (data) => {
+        if(data == null){
+          this.snackBar.open("Book ID  is exist!", 'Undo', {duration: 1500});
+        } else{
+          this.book=data;
+          this.dialogRefAdd.close();
+          this.snackBar.open("Add succesful book ID: " + this.book.id, 'Undo', {duration: 1500});
+        }
       },
       () => {
       },
       () => {
-        this.dialogRefAdd.close();
+
       }
     )
   }

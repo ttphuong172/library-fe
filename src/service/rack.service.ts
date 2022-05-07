@@ -41,6 +41,15 @@ export class RackService {
     return this.httpClient.get(this.apiURL+'/api/racks/library/' + name,httpOptions)
   }
 
+  findAllDTOByLibrary_Name(name: any) {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.get(this.apiURL+'/api/racks/library/dto/' + name,httpOptions)
+  }
+
   save(rack: any) {
     let httpOptions = {
       headers: new HttpHeaders({

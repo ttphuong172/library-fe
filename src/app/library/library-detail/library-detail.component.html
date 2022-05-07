@@ -1,0 +1,49 @@
+<div class="container">
+  <h3>List of Racks</h3>
+  <ul>
+    <li>Library Name: {{libraryName}}</li>
+  </ul>
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-2">
+      <button  style="width: 100%" class="btn btn-light" (click)="openDialogAdd()">
+        <i class="fa fa-plus"></i> New rack
+      </button>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2"></div>
+    <div class="col-2">
+      <button style="width: 100%" class="btn btn-light" [routerLink]="['/admin/libraries']">
+        <i class="fa fa-reply"></i>
+        Back
+      </button>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+    <th style="text-align: center">Order</th>
+    <th style="text-align: center">Name</th>
+    <th>Library</th>
+    <th style="text-align: center">Quantity</th>
+    <th style="text-align: center">Loaned Quantity</th>
+    <th style="text-align: center">Keeping Quantity</th>
+    <th style="text-align: center">Detail</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let rack of rackList; index as i">
+      <td style="text-align: center">{{i+1}}</td>
+      <td style="text-align: center">{{rack.name}}</td>
+      <td>{{rack.library.name}}</td>
+      <td style="text-align: center">{{rack.bookQuantity}}</td>
+      <td style="text-align: center">{{rack.loanedBook}}</td>
+      <td style="text-align: center">{{rack.keepingBook}}</td>
+      <td style="text-align: center">
+        <button style="background-color: #007bff;border-color: #007bff;color: white" [routerLink]="['/admin/racks', rack.id]">
+          <i class="fa fa-info-circle"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

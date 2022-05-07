@@ -5,10 +5,10 @@ import {AuthService} from "../../../service/auth.service";
 
 @Component({
   selector: 'app-account-detail-user',
-  templateUrl: './account-detail-user.component.html',
-  styleUrls: ['./account-detail-user.component.css']
+  templateUrl: './borrower-detail-user.component.html',
+  styleUrls: ['./borrower-detail-user.component.css']
 })
-export class AccountDetailUserComponent implements OnInit {
+export class BorrowerDetailUserComponent implements OnInit {
   borrower:any;
   account:any;
   username:any;

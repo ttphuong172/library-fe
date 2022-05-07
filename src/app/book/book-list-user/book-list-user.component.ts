@@ -44,20 +44,20 @@ export class BookListUserComponent implements OnInit {
   }
 
   search() {
-    this.bookService.search(this.isbn, this.title, this.publisher,this.status).subscribe(
-      (data) => {
-        this.bookList=data
-        this.quantityLoan=0;
-        this.quantityAvailable=0;
-        for (let i = 0; i < this.bookList.length; i++) {
-          if (this.bookList[i].status == 'LOANED') {
-            this.quantityLoan++;
-          } else {
-            this.quantityAvailable++;
-          }
-        }
-      }
-    )
+    // this.bookService.search(this.isbn, this.title, this.publisher,this.status).subscribe(
+    //   (data) => {
+    //     this.bookList=data
+    //     this.quantityLoan=0;
+    //     this.quantityAvailable=0;
+    //     for (let i = 0; i < this.bookList.length; i++) {
+    //       if (this.bookList[i].status == 'LOANED') {
+    //         this.quantityLoan++;
+    //       } else {
+    //         this.quantityAvailable++;
+    //       }
+    //     }
+    //   }
+    // )
   }
 
   changeStatus($event: any) {

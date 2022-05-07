@@ -1,0 +1,49 @@
+<div class="container">
+  <h3>List of Borrower</h3>
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-2"></div>
+    <div class="col-2">Borrower Name</div>
+    <div class="col-4">
+      <input type="text" class="form-control" #fullname>
+    </div>
+    <div class="col-2" (click)="searchBorrower(fullname.value)">
+      <button class="btn btn-primary">Search</button>
+    </div>
+    <div class="col-2"></div>
+  </div>
+
+  <div>
+    <table class="table table-bordered">
+      <thead>
+      <th style="text-align: center">Student ID</th>
+      <th>Name</th>
+      <th>Position</th>
+      <th style="text-align: center">Quantity</th>
+      <th style="text-align: center">Returned Quantity</th>
+      <th style="text-align: center">Keeping Quantity</th>
+      <th style="text-align: center">Detail</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let account of borrowerList | paginate: { itemsPerPage: 10, currentPage: p }">
+        <td style="text-align: center">{{account.code}}</td>
+        <td>{{account.fullname}}</td>
+        <td>{{account.position}}</td>
+        <td style="text-align: center">{{account.bookQuantity}}</td>
+        <td style="text-align: center">{{account.returnedQuantity}}</td>
+        <td style="text-align: center">{{account.keepingQuantity}}</td>
+        <td style="text-align: center">
+          <button style="background-color: #007bff;border-color: #007bff;color: white" [routerLink]="['/admin/borrowers', account.username]">
+            <i class="fa fa-info-circle"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div style="text-align: right">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+
+
+
+</div>

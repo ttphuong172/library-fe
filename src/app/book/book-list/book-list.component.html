@@ -8,7 +8,7 @@
     </ul>
   </div>
   <div style="margin: 20px 0px">
-    <div class="row">
+    <div class="row" style="margin-bottom: 10px">
       <div class="col-1">ISBN</div>
       <div class="col-2">
         <input type="text" class="form-control" (keyup)="isbnKeyup($event)">
@@ -28,6 +28,22 @@
         </select>
       </div>
     </div>
+    <div class="row">
+      <div class="col-1">Library</div>
+      <div class="col-2">
+        <select name="" class="form-control" (change)="changeLibrary($event)">
+          <option value="">Choose a library</option>
+          <option *ngFor="let library of libraryList" [value]="library.id">{{library.name}}</option>
+        </select>
+      </div>
+      <div class="col-1">Rack</div>
+      <div class="col-2">
+        <select name="" class="form-control" (change)="changeRack($event)">
+          <option value="">Choose a rack</option>
+          <option *ngFor="let rack of rackList" [value]="rack.id">{{rack.name}}</option>
+        </select>
+      </div>
+    </div>
   </div>
 
   <div class="row" style="margin-bottom: 10px">
@@ -43,7 +59,7 @@
     <div class="col-2"></div>
   </div>
 
-  <table class="table table-bordered">
+  <table class="table table-bordered table-striped">
     <thead>
     <th style="text-align: center">Order</th>
     <th style="text-align: center">Book ID</th>

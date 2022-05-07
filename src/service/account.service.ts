@@ -13,6 +13,33 @@ export class AccountService {
     private authService:AuthService
   ) { }
 
+  findAll(){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.get(this.apiURL+'/api/accounts',httpOptions)
+  }
+
+  save(account:any){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.post(this.apiURL + '/api/accounts', account,httpOptions)
+  }
+
+  update(account:any){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.put(this.apiURL+'/api/accounts/' + account.username, account,httpOptions)
+  }
+
   findById(id:any){
     let httpOptions = {
       headers: new HttpHeaders({
@@ -55,4 +82,23 @@ export class AccountService {
     }
     return this.httpClient.put(this.apiURL+'/api/accounts/changepassword',changePasswordDTO,httpOptions)
   }
+
+  search(code:any,username:any,fullname:any,position:any){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.get(this.apiURL+'/api/accounts/search/?code=' + code + '&username=' + username + '&fullname=' + fullname + '&position=' + position ,httpOptions)
+  }
+
+  delete(username: any) {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': "Bearer " + this.authService.getToken()
+      })
+    }
+    return this.httpClient.delete(this.apiURL + '/api/accounts/' + username,httpOptions)
+  }
+
 }

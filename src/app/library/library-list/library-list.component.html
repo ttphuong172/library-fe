@@ -1,0 +1,21 @@
+<div class="container">
+  <h3>List of Libraries</h3>
+  <table class="table table-bordered table-striped">
+    <thead>
+    <th style="text-align: center">ID</th>
+    <th>Name</th>
+    <th style="text-align: center">Detail</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let library of libraryList">
+      <td style="text-align: center">{{library.id}}</td>
+      <td>{{library.name}}</td>
+      <td style="text-align: center">
+        <button style="background-color: #007bff;border-color: #007bff;color: white" [routerLink]="['/admin/libraries', library.name]">
+          <i class="fa fa-info-circle"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

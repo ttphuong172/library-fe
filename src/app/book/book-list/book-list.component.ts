@@ -4,6 +4,8 @@ import {BookAddRackComponent} from "../../rack/book-add-rack/book-add-rack.compo
 import {MatDialog} from "@angular/material/dialog";
 import {BookDeleteComponent} from "../book-delete/book-delete.component";
 import {BookAddComponent} from "../book-add/book-add.component";
+import {LibraryService} from "../../../service/library.service";
+import {RackService} from "../../../service/rack.service";
 
 @Component({
   selector: 'app-book-list',
@@ -20,10 +22,17 @@ export class BookListComponent implements OnInit {
   status='';
   statusList:string[]=['','AVAILABLE','LOANED'];
   p=1;
+  libraryList: any;
+  rackList: any;
+  nameLibrary: any;
+  idLibrary='';
+  idRack='' ;
 
   constructor(
     private bookService: BookService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private libraryService:LibraryService,
+    private rackService:RackService
   ) {
   }
 
@@ -39,6 +48,14 @@ export class BookListComponent implements OnInit {
             this.quantityAvailable++;
           }
         }
+      },
+      ()=>{},
+      ()=>{
+        this.libraryService.findAll().subscribe(
+          (data)=>{
+            this.libraryList=data
+          },()=>{},()=>{}
+        )
       }
     )
   }
@@ -63,7 +80,8 @@ export class BookListComponent implements OnInit {
   }
 
   search() {
-    this.bookService.search(this.isbn, this.title, this.publisher,this.status).subscribe(
+    this.p=1;
+    this.bookService.search(this.isbn, this.title, this.publisher,this.status,this.idLibrary,this.idRack).subscribe(
       (data) => {
         this.bookList=data
         this.quantityLoan=0;
@@ -98,5 +116,22 @@ export class BookListComponent implements OnInit {
         this.ngOnInit();
       }
     )
+  }
+
+  changeLibrary($event: any) {
+    this.idRack='';
+    this.idLibrary = $event.target.value;
+    this.nameLibrary = $event.target.selectedOptions[0].innerHTML;
+    this.search();
+    this.rackService.findAllByLibrary_Name(this.nameLibrary).subscribe(
+      (data)=>{
+        this.rackList=data;
+      }
+    )
+  }
+
+  changeRack($event: any) {
+    this.idRack=$event.target.value;
+    this.search()
   }
 }

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {BookService} from "../../../service/book.service";
-import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {LibraryService} from "../../../service/library.service";
 import {RackService} from "../../../service/rack.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-book-add',
@@ -20,6 +21,7 @@ export class BookAddComponent implements OnInit {
   libraryList:any;
   nameLibrarySelected:any;
   rackList: any;
+  book:any;
 
   constructor(
     private bookService: BookService,
@@ -27,21 +29,22 @@ export class BookAddComponent implements OnInit {
     private rackService:RackService,
     private formBuilder: FormBuilder,
     public dialogRefAdd: MatDialogRef<BookAddComponent>,
+    private snackBar: MatSnackBar
   ) {
   }
 
   ngOnInit(): void {
     this.bookForm = new FormGroup({
-      isbn: new FormControl(''),
-      id: new FormControl(''),
-      title: new FormControl(''),
+      isbn: new FormControl('',Validators.required),
+      id: new FormControl('',Validators.required),
+      title: new FormControl('',Validators.required),
       cover: new FormControl(''),
-      authors: this.formBuilder.array([]),
-      publisher: new FormControl(''),
-      number_of_pages: new FormControl(''),
-      publish_date: new FormControl(''),
-      library: new FormControl(''),
-      rack: new FormControl(''),
+      authors: this.formBuilder.array([],Validators.required),
+      publisher: new FormControl('',Validators.required),
+      number_of_pages: new FormControl('',Validators.required),
+      publish_date: new FormControl('',Validators.required),
+      library: new FormControl('',Validators.required),
+      rack: new FormControl('',Validators.required),
     });
 
     this.libraryService.findAll().subscribe(
@@ -136,12 +139,19 @@ export class BookAddComponent implements OnInit {
 
   save() {
     this.bookService.save(this.bookForm.value).subscribe(
-      () => {
+      (data) => {
+        if(data == null){
+          this.snackBar.open("Book ID  is exist!", 'Undo', {duration: 1500});
+        } else{
+          this.book=data;
+          this.dialogRefAdd.close();
+          this.snackBar.open("Add succesful book ID: " + this.book.id, 'Undo', {duration: 1500});
+        }
       },
       () => {
       },
       () => {
-        this.dialogRefAdd.close();
+
       }
     )
   }

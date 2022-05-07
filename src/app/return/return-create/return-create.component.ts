@@ -26,30 +26,32 @@ export class ReturnCreateComponent implements OnInit {
 
   searchLendingBook($event: any) {
     let id = $event.target.value;
+
     if (id == '') {
       this.snackBar.open("Please enter book id", 'Undo', {duration: 1500});
     } else {
       this.lendingbookService.findAllByBook_IdAndReturnDateIsNull(id).subscribe(
         (data) => {
-          this.lendingBookDTO = data;
-          // console.log(this.lendingBookDTO)
-          //Test book inserted into bookList
-          let isExist = false;
-          for (let i = 0; i < this.lendingBookDTOList.length; i++) {
-            if (this.lendingBookDTO.book_id == this.lendingBookDTOList[i].book_id) {
-              isExist = true;
-              break;
+          if (data ==null){
+            this.snackBar.open("Book is not exist!", 'Undo', {duration: 1500});
+          } else {
+            this.lendingBookDTO = data;
+            // console.log(this.lendingBookDTO)
+            //Test book inserted into bookList
+            let isExist = false;
+            for (let i = 0; i < this.lendingBookDTOList.length; i++) {
+              if (this.lendingBookDTO.book_id == this.lendingBookDTOList[i].book_id) {
+                isExist = true;
+                break;
+              }
+            }
+            if (!isExist) {
+              this.lendingBookDTOList.push(this.lendingBookDTO);
+              // console.log(this.lendingBookDTOList)
+            } else {
+              this.snackBar.open("Book is already on the list!", 'Undo', {duration: 1500});
             }
           }
-          if (!isExist) {
-            this.lendingBookDTOList.push(this.lendingBookDTO);
-            // console.log(this.lendingBookDTOList)
-          } else {
-            this.snackBar.open("Book is already on the list!", 'Undo', {duration: 1500});
-          }
-        },
-        () => {
-          this.snackBar.open("Book is not exist!", 'Undo', {duration: 1500});
         }
       )
     }

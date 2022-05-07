@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {StudentService} from "../../../service/student.service";
 import {AccountService} from "../../../service/account.service";
 
 
 @Component({
   selector: 'app-student-detail',
-  templateUrl: './student-detail.component.html',
-  styleUrls: ['./student-detail.component.css']
+  templateUrl: './borrower-detail.component.html',
+  styleUrls: ['./borrower-detail.component.css']
 })
-export class StudentDetailComponent implements OnInit {
+export class BorrowerDetailComponent implements OnInit {
   borrower:any;
   returnedQuantity=0;
   p=1;
